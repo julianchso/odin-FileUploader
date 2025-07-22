@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id String @id @default(uuid())
+}
+
+model User {
+  // id, username, hash, salt, documents, sharedFolders
+
+  id            String         @id @default(uuid())
+  // id            Int            @id @default(autoincrement())
+  username      String         @unique
+  hash          String
+  salt          String
+  documents     metadata[]
+  sharedFolders SharedFolder[]
+}
+
+model metadata {
+  // id             Int            @id @default(autoincrement())
+  id             String         @id @default(uuid())
+  name           String
+  size           Int?
+  mimeType       String?
+  createdAt      DateTime       @default(now())
+  parentFolderId String?
+  userId         String
+  sharedFolders  SharedFolder[]
+
+  User         User       @relation(fields: [userId], references: [id])
+  parentFolder metadata?  @relation("metadataParent", fields: [parentFolderId], references: [id], onDelete: Cascade)
+  childFolders metadata[] @relation("metadataParent")
+}
+
+model SharedFolder {
+  id        String   @id @default(uuid())
+  userId    String
+  folderId  String
+  expiresAt DateTime
+
+  user   User     @relation(fields: [userId], references: [id])
+  folder metadata @relation(fields: [folderId], references: [id], onDelete: Cascade)
+}
