@@ -2,8 +2,8 @@
   "name": "odin-fileuploader",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
-  "type": "module",
+  "main": "src/app",
+  "types": "src/app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon src/app.ts",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.12.0",
     "@quixo3/prisma-session-store": "^3.1.13",
     "body-parser": "^2.2.0",
     "dotenv": "^17.2.0",
@@ -24,8 +25,12 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/express-session": "^1.18.2",
     "@types/node": "^24.0.15",
+    "@types/passport": "^1.0.17",
     "prisma": "^6.12.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
