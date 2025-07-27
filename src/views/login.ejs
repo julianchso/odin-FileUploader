@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <%- include('./partials/navbar.ejs') %>
+
+  <body>
+    <h2>Log In</h2>
+    <p>Don't have an account? <a href="/sign-up">Sign Up</a></p>
+    <div>
+      <form action="/login">
+        <label for="username">
+          Username:
+          <input type="username" name="username" id="username" label="username" required />
+        </label>
+        <label for="password">
+          Password:
+          <input type="password" name="password" id="password" label="password" required />
+        </label>
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  </body>
+</html>

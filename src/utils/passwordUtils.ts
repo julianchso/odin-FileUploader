@@ -1,0 +1,19 @@
+import crypto from 'crypto';
+
+function genPassword(password: string) {
+  // Zach Gollwitzer: https://www.youtube.com/watch?v=xMEOT9J0IvI&list=PLYQSCk-qyTW2ewJ05f_GKHtTIzjynDgjK&index=5
+  const salt = crypto.randomBytes(32).toString('hex');
+  const genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+
+  return {
+    salt: salt,
+    hash: genHash,
+  };
+}
+
+function validatePassword(password: string, hash: string, salt: string) {
+  const hashVerify = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+  return hash == hashVerify;
+}
+
+export { genPassword, validatePassword };

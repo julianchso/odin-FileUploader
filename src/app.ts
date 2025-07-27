@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import expressSession from 'express-session';
+import session from 'express-session';
 import passport from 'passport';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { config, configDotenv } from 'dotenv';
+
+import indexRouter from './routes/indexRouter';
 
 import { PrismaClient } from '@prisma/client';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
@@ -19,13 +21,13 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, '/src/views'));
+app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname + '../public')));
 
 app.use(
-  expressSession({
+  session({
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, //ms
     },
@@ -42,6 +44,8 @@ app.use(
 
 app.use(passport.session());
 app.use(passport.initialize());
+
+app.use('/', indexRouter);
 
 app.listen(PORT, () => {
   console.log(`express app listening on PORT: ${PORT}`);
