@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { config, configDotenv } from 'dotenv';
 
-import indexRouter from './routes/indexRouter';
+import authRouter from './routes/authRouter';
 
 import { PrismaClient } from '@prisma/client';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
@@ -45,7 +45,7 @@ app.use(
 app.use(passport.session());
 app.use(passport.initialize());
 
-app.use('/', indexRouter);
+app.use('/', authRouter);
 
 app.listen(PORT, () => {
   console.log(`express app listening on PORT: ${PORT}`);
