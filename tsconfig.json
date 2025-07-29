@@ -6,6 +6,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,                        
     "skipLibCheck": true,
-    // "moduleResolution": "nodenext"
+    "typeRoots": ["./src/types", "./node_modules/@types"]
   }
 }

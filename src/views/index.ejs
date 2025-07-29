@@ -8,6 +8,10 @@
   <%- include('./partials/navbar.ejs') %>
   <body>
     <h1>Home</h1>
-    <p>asdfasdfasd</p>
+    <% if (user) { %>
+    <h3><%= user %></h3>
+    <% } else { %>
+    <h3>logged out</h3>
+    <% } %>
   </body>
 </html>

@@ -2,13 +2,16 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
-import { config, configDotenv } from 'dotenv';
+// import passportConfig from './config/passportConfig';
+import './config/passportConfig';
+
+import path from 'path';
+import { configDotenv } from 'dotenv';
 
 import authRouter from './routes/authRouter';
 
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
+import prisma from './database/prismaClient';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 
 configDotenv();
@@ -34,7 +37,8 @@ app.use(
     secret: 'arsenal is the best',
     resave: true,
     saveUninitialized: true,
-    store: new PrismaSessionStore(new PrismaClient(), {
+    // store: new PrismaSessionStore(new PrismaClient(), {
+    store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000,
       dbRecordIdIsSessionId: true,
       dbRecordIdFunction: undefined,
@@ -42,8 +46,8 @@ app.use(
   })
 );
 
-app.use(passport.session());
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', authRouter);
 
