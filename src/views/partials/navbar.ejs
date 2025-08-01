@@ -10,8 +10,12 @@
       <a href="/">Home</a>
     </div>
     <div>
+      <% if (!currentUser) {%>
       <a href="/login">Log In</a>
       <a href="/sign-up">Sign Up</a>
+      <% } else { %>
+      <a href="/logout"> Log Out</a>
+      <% } %>
     </div>
   </body>
 </html>

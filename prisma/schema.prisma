@@ -15,15 +15,15 @@ model Session {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  username      String         @unique
+  id            String           @id @default(uuid())
+  username      String           @unique
   hash          String
   salt          String
-  documents     metadata[]
+  documents     FolderMetadata[]
   sharedFolders SharedFolder[]
 }
 
-model metadata {
+model FolderMetadata {
   // id             Int            @id @default(autoincrement())
   id             String         @id @default(uuid())
   name           String
@@ -34,9 +34,9 @@ model metadata {
   userId         String
   sharedFolders  SharedFolder[]
 
-  User         User       @relation(fields: [userId], references: [id])
-  parentFolder metadata?  @relation("metadataParent", fields: [parentFolderId], references: [id], onDelete: Cascade)
-  childFolders metadata[] @relation("metadataParent")
+  User         User             @relation(fields: [userId], references: [id])
+  parentFolder FolderMetadata?  @relation("metadataParent", fields: [parentFolderId], references: [id], onDelete: Cascade)
+  childFolders FolderMetadata[] @relation("metadataParent")
 }
 
 model SharedFolder {
@@ -45,6 +45,6 @@ model SharedFolder {
   folderId  String
   expiresAt DateTime
 
-  user   User     @relation(fields: [userId], references: [id])
-  folder metadata @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  user   User           @relation(fields: [userId], references: [id])
+  folder FolderMetadata @relation(fields: [folderId], references: [id], onDelete: Cascade)
 }

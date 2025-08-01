@@ -57,6 +57,15 @@ const loginPost = (req: Request, res: Response, next: NextFunction) => {
   })(req, res, next);
 };
 
-const logoutPost = (req: Request, res: Response, next: NextFunction) => {};
+const logout = (req: Request, res: Response, next: NextFunction) => {
+  req.logOut(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.session.destroy(function (err) {
+      res.redirect('/');
+    });
+  });
+};
 
-export { homeGet, signUpGet, signUpPost, loginGet, loginPost };
+export { homeGet, signUpGet, signUpPost, loginGet, loginPost, logout };

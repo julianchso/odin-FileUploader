@@ -1,6 +1,12 @@
 import { Router } from 'express';
-import passport from 'passport';
-import { homeGet, signUpGet, signUpPost, loginGet, loginPost } from '../controller/authController';
+import {
+  homeGet,
+  signUpGet,
+  signUpPost,
+  loginGet,
+  loginPost,
+  logout,
+} from '../controller/authController';
 
 const authRouter = Router();
 
@@ -11,5 +17,7 @@ authRouter.post('/login', loginPost);
 
 authRouter.get('/sign-up', signUpGet);
 authRouter.post('/sign-up', signUpPost);
+
+authRouter.get('/logout', logout);
 
 export default authRouter;
