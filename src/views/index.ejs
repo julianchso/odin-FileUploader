@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
   </head>
-  <%- include('./partials/navbar.ejs') %>
+  <div><%- include('./partials/navbar.ejs') %></div>
+  <% if (currentUser) { %>
+  <div><%- include('./partials/sidebar.ejs') %></div>
+  <% } %>
   <body>
     <h1>Home</h1>
     <% if (currentUser) { %>
