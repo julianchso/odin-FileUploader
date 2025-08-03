@@ -11,6 +11,8 @@ import { fileURLToPath } from 'url';
 import { configDotenv } from 'dotenv';
 
 import authRouter from './routes/authRouter.js';
+import folderRouter from './routes/folderRouter.js';
+import fileRouter from './routes/fileRouter.js';
 
 // import { PrismaClient } from '@prisma/client';
 import prisma from './database/prismaClient.js';
@@ -22,7 +24,6 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
-console.log(`filename: ${__filename}`);
 const __dirname = path.dirname(__filename);
 
 app.use(express.urlencoded({ extended: false }));
@@ -59,6 +60,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/', authRouter);
+app.use('/folder', folderRouter);
+app.use('/file', fileRouter);
 
 app.listen(PORT, () => {
   console.log(`express app listening on PORT: ${PORT}`);

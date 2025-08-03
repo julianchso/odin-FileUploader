@@ -3,12 +3,6 @@ import prisma from '../database/prismaClient.js';
 import passport from 'passport';
 const homeGet = async (req, res) => {
     let user = req.session.passport?.user;
-    // let userId;
-    // if (req.session.passport) {
-    //   userId = req.session.passport.user;
-    // } else {
-    //   userId = null;
-    // }
     res.render('folders', {
         title: 'Home',
         user: user,
@@ -26,7 +20,7 @@ const signUpPost = async (req, res) => {
         const saltHash = genPassword(req.body.password);
         const salt = saltHash.salt;
         const hash = saltHash.hash;
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 username: req.body.username,
                 salt: salt,

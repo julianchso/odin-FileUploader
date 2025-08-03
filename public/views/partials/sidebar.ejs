@@ -8,17 +8,40 @@
   <body>
     <ul>
       <% if (currentUser) { %>
-      <li><button>New File</button></li>
+      <li><button id="newFileModalOpenBtn">New File</button></li>
       <li><button id="newFolderModalOpenBtn">New Folder</button></li>
       <% } %>
     </ul>
-    <dialog name="newFolderModal">
+    <dialog id="newFolderModal">
+      <div>
+        <p>New Folder</p>
+        <button id="newFolderModalCloseBtn" type="reset">x</button>
+      </div>
       <form action="/folders" method="POST">
-        <button id="newFolderModalCloseBtn">x</button>
-        <input type="hidden" label="newFolder" />
-        <button type="submit">New Folder</button>
+        <div>
+          <input type="text" id="newFolderName" />
+          <input type="hidden" label="newFolder" />
+        </div>
+        <div>
+          <button type="submit">Create</button>
+        </div>
       </form>
     </dialog>
+    <dialog id="newFileModal">
+      <div>
+        <p>New File</p>
+        <button id="newFileModalCloseBtn" type="reset">x</button>
+      </div>
+      <form action="/files" method="POST">
+        <div>
+          <input type="file" name="fileUpload" />
+        </div>
+        <div>
+          <button type="submit">Upload</button>
+        </div>
+      </form>
+    </dialog>
+    <script type="module" src="/scripts/createNewFile.js"></script>
     <script type="module" src="/scripts/createNewFolder.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import prisma from '../database/prismaClient.js';
+import { NextFunction, Request, Response } from 'express';
 
 const createFolder = async (name: string, userId: string) => {
   return prisma.metadata.create({
@@ -10,4 +11,6 @@ const createFolder = async (name: string, userId: string) => {
   });
 };
 
-export default { createFolder };
+const uploadFile = async () => {};
+
+export { createFolder, uploadFile };

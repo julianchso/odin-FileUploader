@@ -8,4 +8,5 @@ const createFolder = async (name, userId) => {
         },
     });
 };
-export default { createFolder };
+const uploadFile = async () => { };
+export { createFolder, uploadFile };
