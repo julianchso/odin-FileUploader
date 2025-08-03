@@ -21,7 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname + '../public')));
+// app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname)));
 app.use(session({
     cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000, //ms
