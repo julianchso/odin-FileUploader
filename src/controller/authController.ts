@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { genPassword } from '../utils/passwordUtils';
-import prisma from '../database/prismaClient';
+import { genPassword } from '../utils/passwordUtils.js';
+import prisma from '../database/prismaClient.js';
 import passport from 'passport';
 
 const homeGet = async (req: Request, res: Response) => {
@@ -13,7 +13,7 @@ const homeGet = async (req: Request, res: Response) => {
   //   userId = null;
   // }
 
-  res.render('index', {
+  res.render('folders', {
     title: 'Home',
     user: user,
   });
@@ -28,19 +28,25 @@ const signUpGet = (req: Request, res: Response) => {
 };
 
 const signUpPost = async (req: Request, res: Response) => {
-  const saltHash = genPassword(req.body.password);
-  const salt: string = saltHash.salt;
-  const hash: string = saltHash.hash;
+  try {
+    const saltHash = genPassword(req.body.password);
+    const salt: string = saltHash.salt;
+    const hash: string = saltHash.hash;
 
-  const user = await prisma.user.create({
-    data: {
-      username: req.body.username,
-      salt: salt,
-      hash: hash,
-    },
-  });
+    const user = await prisma.user.create({
+      data: {
+        username: req.body.username,
+        salt: salt,
+        hash: hash,
+      },
+    });
 
-  console.log(user);
+    res.redirect('/login');
+  } catch (err) {
+    console.log(err);
+  }
+
+  // console.log(user);
 };
 
 const loginGet = (req: Request, res: Response) => {

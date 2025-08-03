@@ -1,4 +1,4 @@
-import prisma from '../database/prismaClient';
+import prisma from '../database/prismaClient.js';
 
 const createFolder = async (name: string, userId: string) => {
   return prisma.metadata.create({

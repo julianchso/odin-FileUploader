@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div><%- include('./partials/navbar.ejs') %></div>
+    <% if (currentUser) { %>
+    <div><%- include('./partials/sidebar.ejs') %></div>
+    <% } %>
+    <h1>Home</h1>
+    <% if (currentUser) { %>
+    <dialog name="newFolder" id="newFolderModal">
+      <form action="/folders" method="POST">
+        <button id="newFolderModalCloseBtn">x</button>
+        <input type="hidden" label="newFolder" />
+        <button type="submit">Create New Folder</button>
+      </form>
+    </dialog>
+    <% } %>
+    <script type="text/javascript" src="../scripts/createNewFolder.js"></script>
+  </body>
+</html>

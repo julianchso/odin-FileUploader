@@ -1,8 +1,8 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { validatePassword } from '../utils/passwordUtils';
+import { validatePassword } from '../utils/passwordUtils.js';
 
-import prisma from '../database/prismaClient';
+import prisma from '../database/prismaClient.js';
 import { User } from '@prisma/client';
 
 export default passport.use(
