@@ -6,11 +6,43 @@
     <title><%= title %></title>
   </head>
   <body>
-    <div><%- include('./partials/navbar.ejs') %></div>
+    <div><%- include('./partials/navbar.ejs'); %></div>
     <% if (currentUser) { %>
     <div><%- include('./partials/sidebar.ejs') %></div>
-    <% } %>
+    <% }; %>
+    <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
+
     <h1>Home</h1>
+    <dialog id="newFolderModal">
+      <div>
+        <p>New Folder</p>
+        <button id="newFolderModalCloseBtn" type="reset">x</button>
+      </div>
+      <form action="/folders" method="POST">
+        <div>
+          <input type="text" id="newFolderName" name="newFolderName" />
+          <input type="hidden" name="parentFolderId" value="<%= parentFolderId || null %>" />
+        </div>
+        <div>
+          <button type="submit">Create</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="newFileModal">
+      <div>
+        <p>New File</p>
+        <button id="newFileModalCloseBtn" type="reset">x</button>
+      </div>
+      <form action="/file" method="POST" enctype="multipart/form-data">
+        <div>
+          <input type="file" name="uploaded_file" />
+          <input type="hidden" name="parentFolderId" value="<%= parentFolderId %>" />
+        </div>
+        <div>
+          <button type="submit">Upload</button>
+        </div>
+      </form>
+    </dialog>
     <script type="module" src="/scripts/createNewFolder.js"></script>
   </body>
 </html>

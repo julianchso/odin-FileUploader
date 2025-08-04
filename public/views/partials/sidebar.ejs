@@ -12,35 +12,6 @@
       <li><button id="newFolderModalOpenBtn">New Folder</button></li>
       <% } %>
     </ul>
-    <dialog id="newFolderModal">
-      <div>
-        <p>New Folder</p>
-        <button id="newFolderModalCloseBtn" type="reset">x</button>
-      </div>
-      <form action="/folders" method="POST">
-        <div>
-          <input type="text" id="newFolderName" name="newFolderName" />
-          <!-- <input type="hidden" label="newFolder" /> -->
-        </div>
-        <div>
-          <button type="submit">Create</button>
-        </div>
-      </form>
-    </dialog>
-    <dialog id="newFileModal">
-      <div>
-        <p>New File</p>
-        <button id="newFileModalCloseBtn" type="reset">x</button>
-      </div>
-      <form action="/file" method="POST" enctype="multipart/form-data">
-        <div>
-          <input type="file" name="uploaded_file" />
-        </div>
-        <div>
-          <button type="submit">Upload</button>
-        </div>
-      </form>
-    </dialog>
     <script type="module" src="/scripts/createNewFile.js"></script>
     <script type="module" src="/scripts/createNewFolder.js"></script>
   </body>
