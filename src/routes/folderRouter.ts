@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { createFolder } from '../controller/folderController.js';
+import { foldersGet, foldersPost } from '../controller/folderController.js';
 
 const folderRouter = Router();
 
-// folderRouter.post('/folders');
+folderRouter.get('/{:id}', foldersGet);
+folderRouter.post('/{:id}', foldersPost);
 
 export default folderRouter;

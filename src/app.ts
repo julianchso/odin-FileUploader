@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', authRouter);
-app.use('/folder', folderRouter);
+app.use('/folders', folderRouter);
 app.use('/file', fileRouter);
 
 app.listen(PORT, () => {

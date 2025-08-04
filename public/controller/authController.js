@@ -1,13 +1,6 @@
 import { genPassword } from '../utils/passwordUtils.js';
 import prisma from '../database/prismaClient.js';
 import passport from 'passport';
-const homeGet = async (req, res) => {
-    let user = req.session.passport?.user;
-    res.render('folders', {
-        title: 'Home',
-        user: user,
-    });
-};
 const signUpGet = (req, res) => {
     if (req.isAuthenticated())
         return res.redirect('/');
@@ -57,4 +50,4 @@ const logout = (req, res, next) => {
         });
     });
 };
-export { homeGet, signUpGet, signUpPost, loginGet, loginPost, logout };
+export { signUpGet, signUpPost, loginGet, loginPost, logout };

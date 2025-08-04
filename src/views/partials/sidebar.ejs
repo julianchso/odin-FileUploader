@@ -19,8 +19,8 @@
       </div>
       <form action="/folders" method="POST">
         <div>
-          <input type="text" id="newFolderName" />
-          <input type="hidden" label="newFolder" />
+          <input type="text" id="newFolderName" name="newFolderName" />
+          <!-- <input type="hidden" label="newFolder" /> -->
         </div>
         <div>
           <button type="submit">Create</button>
@@ -32,9 +32,9 @@
         <p>New File</p>
         <button id="newFileModalCloseBtn" type="reset">x</button>
       </div>
-      <form action="/files" method="POST">
+      <form action="/file" method="POST" enctype="multipart/form-data">
         <div>
-          <input type="file" name="fileUpload" />
+          <input type="file" name="uploaded_file" />
         </div>
         <div>
           <button type="submit">Upload</button>

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import {
-  homeGet,
   signUpGet,
   signUpPost,
   loginGet,
@@ -10,7 +9,7 @@ import {
 
 const authRouter = Router();
 
-authRouter.get('/', homeGet);
+// authRouter.get('/', homeGet);
 
 authRouter.get('/login', loginGet);
 authRouter.post('/login', loginPost);
