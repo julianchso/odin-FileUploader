@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && copyfiles -u 1 src/views/**/* public",
     "nodemon": "nodemon public/app.js",
-    "dev": "npm run nodemon",
+    "dev": "npm run build && npm run nodemon",
     "dev1": "npx ts-node src/app.js"
   },
   "author": "",

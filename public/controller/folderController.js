@@ -1,19 +1,17 @@
-import { createFolder } from '../helperFunctions/folderHelpers.js';
-import { getFolderTree } from '../helperFunctions/folderHelpers.js';
+import { createFolder, getFolderById, getFolderTree } from '../helperFunctions/folderHelpers.js';
 const foldersGet = async (req, res, next) => {
     const user = req.session.passport?.user;
     const userId = req.user?.id;
     const folders = await getFolderTree(userId);
-    let folderNames = [];
-    folders.forEach((folder) => {
-        folderNames.push(folder.name);
-    });
     const folderId = req.params.folderId;
+    if (req.params.folderId) {
+        const folder = await getFolderById(req.params.folderId);
+        console.log(folder);
+    }
     res.render('folders', {
         title: 'Home',
         user: user,
         folders: folders,
-        folderNames: folderNames,
         parentFolderId: folderId,
     });
 };
@@ -21,10 +19,8 @@ const foldersPost = async (req, res, next) => {
     const userId = req.user?.id;
     const folderName = req.body.newFolderName;
     let parentFolderId;
-    console.log(`params id foldersPost: ${req.params.folderId}`);
-    console.log(`input form foldersPost: ${req.body.parentFolderId}`);
-    if (req.params.folderId) {
-        parentFolderId = req.params.folderId;
+    if (req.body.parentFolderId) {
+        parentFolderId = req.body.parentFolderId;
     }
     else {
         parentFolderId = null;
@@ -33,6 +29,6 @@ const foldersPost = async (req, res, next) => {
         createFolder(folderName, userId, parentFolderId);
     }
     next();
-    res.redirect('/folders');
+    res.redirect(`/folders/${parentFolderId}`);
 };
 export { foldersGet, foldersPost };

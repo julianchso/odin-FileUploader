@@ -29,7 +29,6 @@ enum Type {
 }
 
 model Metadata {
-  // id             Int            @id @default(autoincrement())
   id             String         @id @default(uuid())
   name           String
   size           Int?

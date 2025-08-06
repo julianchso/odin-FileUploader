@@ -24,4 +24,15 @@ const getFolderTree = async (userId, parentFolderId) => {
     });
     return allFolders;
 };
-export { createFolder, getFolderTree };
+const getFolderById = async (id) => {
+    const folder = await prisma.metadata.findUnique({
+        where: {
+            id: id,
+        },
+        include: {
+            childFolders: true,
+        },
+    });
+    return folder;
+};
+export { createFolder, getFolderTree, getFolderById };
