@@ -1,6 +1,6 @@
 import prisma from '../database/prismaClient.js';
 import { NextFunction, Request, Response } from 'express';
-import { createFolder, getFolderById, getFolderTree } from '../helperFunctions/folderHelpers.js';
+import { createFolder, getFolderById, getFolderTree } from './folderHelpers.js';
 
 const foldersGet = async (req: Request, res: Response, next: NextFunction) => {
   const user = req.session.passport?.user;
@@ -40,4 +40,8 @@ const foldersPost = async (req: Request, res: Response, next: NextFunction) => {
   res.redirect(`/folders/${parentFolderId}`);
 };
 
-export { foldersGet, foldersPost };
+const folderDelete = async (req: Request, res: Response) => {
+  console.log('folder delete');
+};
+
+export { foldersGet, foldersPost, folderDelete };

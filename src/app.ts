@@ -10,9 +10,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { configDotenv } from 'dotenv';
 
-import authRouter from './routes/authRouter.js';
-import folderRouter from './routes/folderRouter.js';
-import fileRouter from './routes/fileRouter.js';
+import authRouter from './auth/authRouter.js';
+import folderRouter from './folders/folderRouter.js';
+import fileRouter from './files/fileRouter.js';
 
 // import { PrismaClient } from '@prisma/client';
 import prisma from './database/prismaClient.js';

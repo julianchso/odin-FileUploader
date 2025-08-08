@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { fileUpload } from '../controller/fileController.js';
+import { fileUpload } from './fileController.js';
 import multer from 'multer';
 
 const upload = multer({ dest: 'uploads/' });

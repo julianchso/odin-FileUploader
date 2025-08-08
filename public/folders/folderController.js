@@ -1,4 +1,4 @@
-import { createFolder, getFolderById, getFolderTree } from '../helperFunctions/folderHelpers.js';
+import { createFolder, getFolderById, getFolderTree } from './folderHelpers.js';
 const foldersGet = async (req, res, next) => {
     const user = req.session.passport?.user;
     const userId = req.user?.id;
@@ -31,5 +31,7 @@ const foldersPost = async (req, res, next) => {
     next();
     res.redirect(`/folders/${parentFolderId}`);
 };
-const folderDelete = async (req, res) => { };
+const folderDelete = async (req, res) => {
+    console.log('folder delete');
+};
 export { foldersGet, foldersPost, folderDelete };

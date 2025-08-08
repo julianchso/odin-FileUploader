@@ -13,6 +13,13 @@
     <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
 
     <h1>Home</h1>
+
+    <div>
+      <div>Name</div>
+      <div>Last Modified</div>
+      <div>File Size</div>
+    </div>
+
     <dialog id="newFolderModal">
       <div>
         <p>New Folder</p>
@@ -28,6 +35,7 @@
         </div>
       </form>
     </dialog>
+
     <dialog id="newFileModal">
       <div>
         <p>New File</p>
@@ -43,6 +51,17 @@
         </div>
       </form>
     </dialog>
+
+    <dialog id="deleteFolderModal">
+      <div>
+        <div>Are you sure you want to delete this folder and all its contents?</div>
+        <form action='/folder/{:folder.id}_method="DELETE"' method="POST">
+          <button type="reset">Cancel</button>
+          <button type="submit" id="deleteFolderBtn">Delete</button>
+        </form>
+      </div>
+    </dialog>
+
     <script type="module" src="/scripts/createNewFolder.js"></script>
   </body>
 </html>

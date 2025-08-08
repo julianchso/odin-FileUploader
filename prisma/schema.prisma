@@ -35,6 +35,7 @@ model Metadata {
   type           Type
   mimeType       String?
   createdAt      DateTime       @default(now())
+  ModifiedAt     DateTime       @default(now())
   parentFolderId String?
   userId         String
   sharedFolders  SharedFolder[]
