@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { foldersGet, foldersPost, folderDelete } from './folderController.js';
+import folderController from './folderController.js';
 import { isAuthenticated } from '../middleware/isAuthenticated.js';
 
 const folderRouter = Router();
 
-folderRouter.get('/{:folderId}', isAuthenticated, foldersGet);
-folderRouter.post('/{:folderId}', isAuthenticated, foldersPost);
+folderRouter.get('/{:folderId}', isAuthenticated, folderController.foldersGet);
+folderRouter.post('/{:folderId}', isAuthenticated, folderController.foldersPost);
 
-folderRouter.delete('/{:folderid}', isAuthenticated, folderDelete);
+folderRouter.delete('/:folderid', isAuthenticated, folderController.folderDelete);
 
 export default folderRouter;

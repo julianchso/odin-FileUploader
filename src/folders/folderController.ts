@@ -1,8 +1,8 @@
-import prisma from '../database/prismaClient.js';
 import { NextFunction, Request, Response } from 'express';
 import { createFolder, getFolderById, getFolderTree } from './folderHelpers.js';
+import prisma from '../database/prismaClient.js';
 
-const foldersGet = async (req: Request, res: Response, next: NextFunction) => {
+const foldersGet = async (req: Request, res: Response) => {
   const user = req.session.passport?.user;
   const userId = req.user?.id;
 
@@ -10,8 +10,7 @@ const foldersGet = async (req: Request, res: Response, next: NextFunction) => {
   const folderId = req.params.folderId;
 
   if (req.params.folderId) {
-    const folder = await getFolderById(req.params.folderId);
-    console.log(folder);
+    await getFolderById(req.params.folderId);
   }
 
   res.render('folders', {
@@ -41,7 +40,14 @@ const foldersPost = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const folderDelete = async (req: Request, res: Response) => {
-  console.log('folder delete');
+  const folderId = req.body.folderId;
+  await prisma.metadata.delete({
+    where: {
+      id: folderId,
+    },
+  });
+
+  res.redirect('/folders');
 };
 
-export { foldersGet, foldersPost, folderDelete };
+export default { foldersGet, foldersPost, folderDelete };

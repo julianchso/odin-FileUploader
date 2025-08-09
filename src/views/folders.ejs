@@ -52,6 +52,18 @@
       </form>
     </dialog>
 
+    <dialog class="deleteFolderModal">
+      <div>
+        <p id="deleteMessage"></p>
+        <form action='/folder/{:folder.id}_method="DELETE"' method="POST" id="deleteFolderForm">
+          <input type="hidden" name="folderId" id="folderIdInput" />
+          <button type="reset" id="deleteFolderModalCloseBtn">Cancel</button>
+          <button type="submit" id="deleteFolderBtn">Delete</button>
+        </form>
+      </div>
+    </dialog>
+
+    <script type="module" src="../../folders/deleteFolder.js"></script>
     <script type="module" src="/scripts/createNewFolder.js"></script>
   </body>
 </html>

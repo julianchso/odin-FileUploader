@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
 import './config/passportConfig.js';
+import methodOverride from 'method-override';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -30,8 +31,8 @@ app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
-// app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.static(path.join(__dirname)));
 
 app.use(
@@ -42,7 +43,6 @@ app.use(
     secret: 'arsenal is the best',
     resave: true,
     saveUninitialized: true,
-    // store: new PrismaSessionStore(new PrismaClient(), {
     store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000,
       dbRecordIdIsSessionId: true,

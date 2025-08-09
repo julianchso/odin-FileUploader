@@ -1,12 +1,12 @@
 import { createFolder, getFolderById, getFolderTree } from './folderHelpers.js';
-const foldersGet = async (req, res, next) => {
+import prisma from '../database/prismaClient.js';
+const foldersGet = async (req, res) => {
     const user = req.session.passport?.user;
     const userId = req.user?.id;
     const folders = await getFolderTree(userId);
     const folderId = req.params.folderId;
     if (req.params.folderId) {
-        const folder = await getFolderById(req.params.folderId);
-        console.log(folder);
+        await getFolderById(req.params.folderId);
     }
     res.render('folders', {
         title: 'Home',
@@ -32,6 +32,12 @@ const foldersPost = async (req, res, next) => {
     res.redirect(`/folders/${parentFolderId}`);
 };
 const folderDelete = async (req, res) => {
-    console.log('folder delete');
+    const folderId = req.body.folderId;
+    await prisma.metadata.delete({
+        where: {
+            id: folderId,
+        },
+    });
+    res.redirect('/folders');
 };
-export { foldersGet, foldersPost, folderDelete };
+export default { foldersGet, foldersPost, folderDelete };

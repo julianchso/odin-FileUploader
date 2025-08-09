@@ -45,21 +45,8 @@
           </div>
         </div>
       </div>
-
       <% }); %>
-      <dialog class="deleteFolderModal">
-        <div>
-          <p id="deleteMessage"></p>
-          <form action='/folder/{:folder.id}_method="DELETE"' method="POST">
-            <!-- <input type="hidden" value="<%# folder.id %>" />
-            <h2><%# folder.name %></h2>
-            <h2><%# folder.id %></h2> -->
-            <button type="reset">Cancel</button>
-            <button type="submit" id="deleteFolderBtn">Delete</button>
-          </form>
-        </div>
-      </dialog>
     </ul>
   </body>
-  <script type="module" src="../../folders/editDeleteFolder.js"></script>
+  <script type="module" src="../../folders/deleteFolder.js"></script>
 </html>

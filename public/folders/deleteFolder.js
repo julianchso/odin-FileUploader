@@ -8,16 +8,12 @@ deleteFolderModalOpenBtns?.forEach((button) => {
     button.addEventListener('click', () => {
         const folderId = button.dataset.id;
         const folderName = button.dataset.name;
-        console.log(folderId);
-        console.log(folderName);
         if (form) {
-            form.action = `/folder/${folderId}?_method=DELETE`;
+            form.action = `/folders/${folderId}?_method=DELETE`;
             form.value = folderId;
-            console.log(`folderId: ${folderId}`);
-            console.log(`form value: ${form.value}`);
         }
         if (deleteMessage) {
-            deleteMessage.textContent = `Are you sure you want to delete "${folderName}"? You cannot undo this action.`;
+            deleteMessage.textContent = `Are you sure you want to delete "${folderName}"? This action cannot be undone.`;
         }
         if (folderIdInput) {
             folderIdInput.value = folderId;
