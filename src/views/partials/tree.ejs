@@ -33,13 +33,32 @@
                 <a href="#" class="editFolderModalOpenBtn"><span>Edit</span></a>
               </li>
               <li>
-                <a href="#" class="deleteFolderModalOpenBtn"><span>Delete</span></a>
+                <a
+                  href="#"
+                  class="deleteFolderModalOpenBtn"
+                  data-id="<%= folder.id %>"
+                  data-name="<%= folder.name %>"
+                  ><span>Delete</span></a
+                >
               </li>
             </ul>
           </div>
         </div>
       </div>
+
       <% }); %>
+      <dialog class="deleteFolderModal">
+        <div>
+          <p id="deleteMessage"></p>
+          <form action='/folder/{:folder.id}_method="DELETE"' method="POST" id="deleteFolderForm">
+            <!-- <input type="hidden" value="<%# folder.id %>" />
+            <h2><%# folder.name %></h2>
+            <h2><%# folder.id %></h2> -->
+            <button type="reset">Cancel</button>
+            <button type="submit" id="deleteFolderBtn">Delete</button>
+          </form>
+        </div>
+      </dialog>
     </ul>
   </body>
   <script type="module" src="../../folders/editDeleteFolder.js"></script>
