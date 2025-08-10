@@ -1,9 +1,9 @@
-const deleteFolderModal: HTMLDialogElement | null = document.querySelector('.deleteFolderModal');
+const deleteFolderModal: HTMLDialogElement | null = document.querySelector('#deleteFolderModal');
 const deleteFolderModalOpenBtns: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll(
   '.deleteFolderModalOpenBtn'
 );
 const form: HTMLFormElement | null = document.querySelector('#deleteFolderForm');
-const folderIdInput: HTMLFormElement | null = document.querySelector('#folderIdInput');
+const folderIdInput: HTMLFormElement | null = document.querySelector('#deleteFolderIdInput');
 const closeModal: HTMLFormElement | null = document.querySelector('#deleteFolderModalCloseBtn');
 
 deleteFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {

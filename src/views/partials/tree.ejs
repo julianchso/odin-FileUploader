@@ -30,7 +30,13 @@
           <div class="dropdown">
             <ul>
               <li>
-                <a href="#" class="editFolderModalOpenBtn"><span>Edit</span></a>
+                <a
+                  href="#"
+                  class="editFolderModalOpenBtn"
+                  data-id="<%= folder.id %>"
+                  data-name="<%= folder.name %>"
+                  ><span>Edit</span></a
+                >
               </li>
               <li>
                 <a
@@ -48,5 +54,6 @@
       <% }); %>
     </ul>
   </body>
+  <script type="module" src="../../folders/editFolder.js"></script>
   <script type="module" src="../../folders/deleteFolder.js"></script>
 </html>

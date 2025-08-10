@@ -1,0 +1,18 @@
+<div>
+  <div class="table-header">
+    <a href="#">Name</a>
+    <a href="#">Date Modified</a>
+    <a href="#">Type</a>
+    <a href="#">File Size</a>
+  </div>
+  <div>
+    <ul>
+      <h2>child folders list</h2>
+      <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %>
+        <h5>inside child folders list</h2>
+      <li><%= childFolder.name %></li>
+      <% }); %> <% } %>
+    </ul>
+    <h2>data-table</h2>
+  </div>
+</div>

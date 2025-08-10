@@ -7,6 +7,7 @@
   </head>
   <body>
     <div><%- include('./partials/navbar.ejs'); %></div>
+    <div><%- include('./partials/data-table.ejs'); %></div>
     <% if (currentUser) { %>
     <div><%- include('./partials/sidebar.ejs') %></div>
     <% }; %>
@@ -20,6 +21,21 @@
       <div>File Size</div>
     </div>
 
+    <!-- Open drawer button for testing -->
+    <div>
+      <button type="button" drawer-show="fileInfoDrawer">Show Drawer</button>
+    </div>
+
+    <!-- File Info Component -->
+    <div id="fileInfoDrawer">
+      <h4>File Info</h4>
+      <a href="#">Close</a>
+      <a href="#">Share</a>
+      <a href="#">Delete</a>
+      <a href="#">Download</a>
+    </div>
+
+    <!-- new Folder Component -->
     <dialog id="newFolderModal">
       <div>
         <p>New Folder</p>
@@ -36,6 +52,7 @@
       </form>
     </dialog>
 
+    <!-- New File Component -->
     <dialog id="newFileModal">
       <div>
         <p>New File</p>
@@ -52,18 +69,31 @@
       </form>
     </dialog>
 
-    <dialog class="deleteFolderModal">
+    <dialog id="deleteFolderModal">
       <div>
         <p id="deleteMessage"></p>
-        <form action='/folder/{:folder.id}_method="DELETE"' method="POST" id="deleteFolderForm">
-          <input type="hidden" name="folderId" id="folderIdInput" />
+        <form action='/folder/:folder.id_method="DELETE"' method="POST" id="deleteFolderForm">
+          <input type="hidden" name="folderId" id="deleteFolderIdInput" />
           <button type="reset" id="deleteFolderModalCloseBtn">Cancel</button>
           <button type="submit" id="deleteFolderBtn">Delete</button>
         </form>
       </div>
     </dialog>
 
-    <script type="module" src="../../folders/deleteFolder.js"></script>
-    <script type="module" src="/scripts/createNewFolder.js"></script>
+    <dialog id="editFolderModal">
+      <div>
+        <p id="editMessage"></p>
+        <form action="/folder/:folder.id_method='PUT'" method="POST" id="editFolderForm">
+          <input type="hidden" name="folderId" id="editFolderIdInput" />
+          <input type="text" name="folderName" id="editFolderNameInput" value="folderName" />
+          <button type="reset" id="editFolderModalCloseBtn">Cancel</button>
+          <button type="submit" id="editFolderBtn">Save</button>
+        </form>
+      </div>
+    </dialog>
+
+    <script type="module" src="../folders/deleteFolder.js"></script>
+    <script type="module" src="../folders/editFolder.js"></script>
+    <script type="module" src="../folders/createNewFolder.js"></script>
   </body>
 </html>

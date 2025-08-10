@@ -1,7 +1,7 @@
-const deleteFolderModal = document.querySelector('.deleteFolderModal');
+const deleteFolderModal = document.querySelector('#deleteFolderModal');
 const deleteFolderModalOpenBtns = document.querySelectorAll('.deleteFolderModalOpenBtn');
 const form = document.querySelector('#deleteFolderForm');
-const folderIdInput = document.querySelector('#folderIdInput');
+const folderIdInput = document.querySelector('#deleteFolderIdInput');
 const closeModal = document.querySelector('#deleteFolderModalCloseBtn');
 deleteFolderModalOpenBtns?.forEach((button) => {
     const deleteMessage = document.querySelector('#deleteMessage');
@@ -13,7 +13,7 @@ deleteFolderModalOpenBtns?.forEach((button) => {
             form.value = folderId;
         }
         if (deleteMessage) {
-            deleteMessage.textContent = `Are you sure you want to delete "${folderName}"? This action cannot be undone.`;
+            deleteMessage.textContent = `Are you sure you want to delete "${folderName}" and all its content? This action cannot be undone.`;
         }
         if (folderIdInput) {
             folderIdInput.value = folderId;

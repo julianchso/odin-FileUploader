@@ -25,7 +25,7 @@ const getFolderTree = async (userId, parentFolderId) => {
     return allFolders;
 };
 const getFolderById = async (id) => {
-    const folder = await prisma.metadata.findUnique({
+    return await prisma.metadata.findUnique({
         where: {
             id: id,
         },
@@ -33,7 +33,26 @@ const getFolderById = async (id) => {
             childFolders: true,
         },
     });
-    return folder;
+};
+const getFolderData = async (folderId) => {
+    const folder = await getFolderById(folderId);
+    if (!folder) {
+        throw new Error('folder not found');
+    }
+    const { childFolders, parentFolderId } = folder;
+    return { files: childFolders, parentFolderId };
+};
+const getRootByUserId = async (userId) => {
+    return await prisma.metadata.findMany({
+        where: {
+            userId: userId,
+            parentFolderId: null,
+        },
+    });
+};
+const getRootFolderData = async (userId) => {
+    const folders = await getRootByUserId(userId);
+    return { files: folders };
 };
 const getFolderByIdFromName = async (name) => {
     const folderName = await prisma.metadata.findFirst({
@@ -44,7 +63,6 @@ const getFolderByIdFromName = async (name) => {
             id: true,
         },
     });
-    console.log(folderName);
     return folderName;
 };
 const getUserFoldersFiles = async (userId) => {
@@ -55,9 +73,4 @@ const getUserFoldersFiles = async (userId) => {
         },
     });
 };
-const testGetUserFoldersFiles = async (userId) => {
-    const folderFiles = await getUserFoldersFiles(userId);
-    console.log(folderFiles);
-};
-testGetUserFoldersFiles('854fe19f-11f9-4cf6-9b85-536704fe8e0c');
-export { createFolder, getFolderTree, getFolderById, getFolderByIdFromName, getUserFoldersFiles };
+export { createFolder, getFolderTree, getFolderById, getFolderByIdFromName, getUserFoldersFiles, getFolderData, getRootFolderData, };
