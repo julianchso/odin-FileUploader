@@ -35,13 +35,16 @@ const foldersPost = async (req, res, next) => {
         parentFolderId = req.body.parentFolderId;
     }
     if (userId && req.isAuthenticated()) {
-        createFolder(folderName, userId, parentFolderId);
+        await createFolder(folderName, userId, parentFolderId);
     }
     // TODO: folderId is returning null? Is folderName null?
-    const folderId = await getFolderByIdFromName(folderName);
-    console.log(`folder id: ${folderId}`);
+    const folderIdObj = await getFolderByIdFromName(folderName);
+    let folderId;
+    if (folderIdObj) {
+        folderId = folderIdObj.id;
+    }
+    console.log(folderId);
     res.redirect(`/folders/${folderId}`);
-    // console.log(`folder name: ${folderName}`);
     next();
 };
 const folderEdit = async (req, res) => {

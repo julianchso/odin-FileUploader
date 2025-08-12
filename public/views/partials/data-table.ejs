@@ -5,14 +5,19 @@
     <a href="#">Type</a>
     <a href="#">File Size</a>
   </div>
+
   <div>
+    <h2>child folders list</h2>
+    <% if (folderData.files.length === 0) {%>
+    <div>No files or folders to display.</div>
+    <%} %>
     <ul>
-      <h2>child folders list</h2>
-      <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %>
-        <h5>inside child folders list</h2>
-      <li><%= childFolder.name %></li>
-      <% }); %> <% } %>
+      <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %> <% if
+      (childFolder.type == "FOLDER") { %>
+      <a href="/folders/<%= childFolder.id %>"> <%= childFolder.name %> </a>
+      <% } else if (childFolder.type == "FILE") { %>
+      <button type="reset"><%= childFolder.name %></button>
+      <% } %> <% }); %> <% } %>
     </ul>
-    <h2>data-table</h2>
   </div>
 </div>

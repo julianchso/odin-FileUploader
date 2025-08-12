@@ -1,7 +1,7 @@
 import prisma from '../database/prismaClient.js';
 
 const createFolder = async (name: string, userId: string, parentFolderId: string | null) => {
-  return prisma.metadata.create({
+  const newFolder = await prisma.metadata.create({
     data: {
       name: name,
       type: 'FOLDER',
@@ -9,6 +9,8 @@ const createFolder = async (name: string, userId: string, parentFolderId: string
       parentFolderId: parentFolderId,
     },
   });
+
+  return newFolder;
 };
 
 const getFolderTree = async (userId: string | undefined, parentFolderId?: string | null) => {
@@ -24,6 +26,7 @@ const getFolderTree = async (userId: string | undefined, parentFolderId?: string
       parentFolder: true,
     },
   });
+
   return allFolders;
 };
 
@@ -36,17 +39,6 @@ const getFolderById = async (id: string) => {
       childFolders: true,
     },
   });
-};
-
-const getFolderData = async (folderId: string) => {
-  const folder = await getFolderById(folderId);
-
-  if (!folder) {
-    throw new Error('folder not found');
-  }
-
-  const { childFolders, parentFolderId } = folder;
-  return { files: childFolders, parentFolderId };
 };
 
 const getRootByUserId = async (userId: string) => {
@@ -64,8 +56,19 @@ const getRootFolderData = async (userId: string) => {
   return { files: folders };
 };
 
+const getFolderData = async (folderId: string) => {
+  const folder = await getFolderById(folderId);
+
+  if (!folder) {
+    throw new Error('folder not found');
+  }
+
+  const { childFolders, parentFolderId } = folder;
+  return { files: childFolders, parentFolderId };
+};
+
 const getFolderByIdFromName = async (name: string) => {
-  const folderName = await prisma.metadata.findFirst({
+  const folderId = await prisma.metadata.findFirst({
     where: {
       name: name,
     },
@@ -73,7 +76,7 @@ const getFolderByIdFromName = async (name: string) => {
       id: true,
     },
   });
-  return folderName;
+  return folderId;
 };
 
 const getUserFoldersFiles = async (userId: string) => {
