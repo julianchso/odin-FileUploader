@@ -1,6 +1,5 @@
 // types/express/index.d.ts
 import { User as PrismaUser } from '@prisma/client';
-import { User } from '@prisma/client';
 import 'express-session';
 
 declare global {

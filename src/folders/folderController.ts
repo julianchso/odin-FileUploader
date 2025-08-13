@@ -31,41 +31,26 @@ const foldersGet = async (req: Request, res: Response) => {
   });
 };
 
-const foldersPost = async (req: Request, res: Response, next: NextFunction) => {
+const foldersPost = async (req: Request, res: Response) => {
   const userId = req.user?.id;
+
   const folderName = req.body.newFolderName;
-  // const folderId = req.body.newFolderId;
-  let parentFolderId;
-
-  // TODO: no new folder with the same name in the same folder
-  // Check to see that name and parentId are not the same
-
-  if (req.body.parentFolderId) {
-    parentFolderId = req.body.parentFolderId;
-  }
+  let parentFolderId = req.body.parentFolderId || null;
 
   if (userId && req.isAuthenticated()) {
-    await createFolder(folderName, userId, parentFolderId);
+    const newFolder = await createFolder(folderName, userId, parentFolderId);
+    return res.redirect(`/folders/${newFolder.id}`);
   }
 
-  // TODO: folderId is returning null? Is folderName null?
-  const folderIdObj = await getFolderByIdFromName(folderName);
-  let folderId;
-  if (folderIdObj) {
-    folderId = folderIdObj.id;
-  }
-  console.log(folderId);
-  res.redirect(`/folders/${folderId}`);
-
-  next();
+  res.status(401).send('Not authenticated');
 };
 
 const folderEdit = async (req: Request, res: Response) => {
-  const folderId = req.body.folderId;
-  const folderName = req.body.folderName;
+  const { folderId, folderName } = req.body;
 
-  const timeElapsed = Date.now();
-  const now = new Date(timeElapsed);
+  if (!folderId || !folderName) {
+    return res.status(400).send('folder ID and name are required');
+  }
 
   await prisma.metadata.update({
     where: {
@@ -73,7 +58,7 @@ const folderEdit = async (req: Request, res: Response) => {
     },
     data: {
       name: folderName,
-      ModifiedAt: now,
+      ModifiedAt: new Date(),
     },
   });
 

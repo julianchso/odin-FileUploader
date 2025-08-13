@@ -1,5 +1,5 @@
 import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
-import { getFolderByIdFromName, getFolderData, getRootFolderData } from './folderPrisma.js';
+import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import prisma from '../database/prismaClient.js';
 const foldersGet = async (req, res) => {
     const user = req.session.passport?.user;
@@ -24,41 +24,28 @@ const foldersGet = async (req, res) => {
         folderData: folderData,
     });
 };
-const foldersPost = async (req, res, next) => {
+const foldersPost = async (req, res) => {
     const userId = req.user?.id;
     const folderName = req.body.newFolderName;
-    // const folderId = req.body.newFolderId;
-    let parentFolderId;
-    // TODO: no new folder with the same name in the same folder
-    // Check to see that name and parentId are not the same
-    if (req.body.parentFolderId) {
-        parentFolderId = req.body.parentFolderId;
-    }
+    let parentFolderId = req.body.parentFolderId || null;
     if (userId && req.isAuthenticated()) {
-        await createFolder(folderName, userId, parentFolderId);
+        const newFolder = await createFolder(folderName, userId, parentFolderId);
+        return res.redirect(`/folders/${newFolder.id}`);
     }
-    // TODO: folderId is returning null? Is folderName null?
-    const folderIdObj = await getFolderByIdFromName(folderName);
-    let folderId;
-    if (folderIdObj) {
-        folderId = folderIdObj.id;
-    }
-    console.log(folderId);
-    res.redirect(`/folders/${folderId}`);
-    next();
+    res.status(401).send('Not authenticated');
 };
 const folderEdit = async (req, res) => {
-    const folderId = req.body.folderId;
-    const folderName = req.body.folderName;
-    const timeElapsed = Date.now();
-    const now = new Date(timeElapsed);
+    const { folderId, folderName } = req.body;
+    if (!folderId || !folderName) {
+        return res.status(400).send('folder ID and name are required');
+    }
     await prisma.metadata.update({
         where: {
             id: folderId,
         },
         data: {
             name: folderName,
-            ModifiedAt: now,
+            ModifiedAt: new Date(),
         },
     });
     res.redirect('/folders');

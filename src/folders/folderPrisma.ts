@@ -1,7 +1,7 @@
 import prisma from '../database/prismaClient.js';
 
 const createFolder = async (name: string, userId: string, parentFolderId: string | null) => {
-  const newFolder = await prisma.metadata.create({
+  return await prisma.metadata.create({
     data: {
       name: name,
       type: 'FOLDER',
@@ -9,12 +9,10 @@ const createFolder = async (name: string, userId: string, parentFolderId: string
       parentFolderId: parentFolderId,
     },
   });
-
-  return newFolder;
 };
 
 const getFolderTree = async (userId: string | undefined, parentFolderId?: string | null) => {
-  const allFolders = await prisma.metadata.findMany({
+  return await prisma.metadata.findMany({
     where: {
       userId: userId,
       parentFolderId: parentFolderId,
@@ -26,8 +24,6 @@ const getFolderTree = async (userId: string | undefined, parentFolderId?: string
       parentFolder: true,
     },
   });
-
-  return allFolders;
 };
 
 const getFolderById = async (id: string) => {
@@ -68,7 +64,7 @@ const getFolderData = async (folderId: string) => {
 };
 
 const getFolderByIdFromName = async (name: string) => {
-  const folderId = await prisma.metadata.findFirst({
+  return await prisma.metadata.findFirst({
     where: {
       name: name,
     },
@@ -76,7 +72,6 @@ const getFolderByIdFromName = async (name: string) => {
       id: true,
     },
   });
-  return folderId;
 };
 
 const getUserFoldersFiles = async (userId: string) => {

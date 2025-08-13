@@ -1,6 +1,6 @@
 import prisma from '../database/prismaClient.js';
 const createFolder = async (name, userId, parentFolderId) => {
-    const newFolder = await prisma.metadata.create({
+    return await prisma.metadata.create({
         data: {
             name: name,
             type: 'FOLDER',
@@ -8,10 +8,9 @@ const createFolder = async (name, userId, parentFolderId) => {
             parentFolderId: parentFolderId,
         },
     });
-    return newFolder;
 };
 const getFolderTree = async (userId, parentFolderId) => {
-    const allFolders = await prisma.metadata.findMany({
+    return await prisma.metadata.findMany({
         where: {
             userId: userId,
             parentFolderId: parentFolderId,
@@ -23,7 +22,6 @@ const getFolderTree = async (userId, parentFolderId) => {
             parentFolder: true,
         },
     });
-    return allFolders;
 };
 const getFolderById = async (id) => {
     return await prisma.metadata.findUnique({
@@ -56,7 +54,7 @@ const getFolderData = async (folderId) => {
     return { files: childFolders, parentFolderId };
 };
 const getFolderByIdFromName = async (name) => {
-    const folderId = await prisma.metadata.findFirst({
+    return await prisma.metadata.findFirst({
         where: {
             name: name,
         },
@@ -64,8 +62,6 @@ const getFolderByIdFromName = async (name) => {
             id: true,
         },
     });
-    console.log(folderId);
-    return folderId;
 };
 const getUserFoldersFiles = async (userId) => {
     return prisma.metadata.findMany({
