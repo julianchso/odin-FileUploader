@@ -1,23 +1,39 @@
-<div>
-  <div class="table-header">
-    <a href="#">Name</a>
-    <a href="#">Date Modified</a>
-    <a href="#">Type</a>
-    <a href="#">File Size</a>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../../styles/output.css" />
+
+    <title><% title %></title>
+  </head>
 
   <div>
-    <h2>child folders list</h2>
-    <% if (folderData.files.length === 0) {%>
-    <div>No files or folders to display.</div>
-    <%} %>
-    <ul>
-      <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %> <% if
-      (childFolder.type == "FOLDER") { %>
-      <a href="/folders/<%= childFolder.id %>"> <%= childFolder.name %> </a>
-      <% } else if (childFolder.type == "FILE") { %>
-      <button type="reset"><%= childFolder.name %></button>
-      <% } %> <% }); %> <% } %>
-    </ul>
+    <div class="table-header">
+      <a href="#">Name</a>
+      <a href="#">Date Modified</a>
+      <a href="#">Type</a>
+      <a href="#">File Size</a>
+    </div>
+
+    <div>
+      <h2>child folders list</h2>
+      <% if (folderData.files.length === 0) {%>
+      <div>No files or folders to display.</div>
+      <%} %>
+      <ul>
+        <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %> <% if
+        (childFolder.type == "FOLDER") { %>
+        <a href="/folders/<%= childFolder.id %>" class=""> <%= childFolder.name %> </a>
+        <% } else if (childFolder.type == "FILE") { %>
+        <button
+          type="reset"
+          class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20"
+        >
+          <%= childFolder.name %>
+        </button>
+        <% } %> <% }); %> <% } %>
+      </ul>
+    </div>
   </div>
-</div>
+</html>

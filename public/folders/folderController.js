@@ -45,7 +45,7 @@ const folderEdit = async (req, res) => {
         },
         data: {
             name: folderName,
-            ModifiedAt: new Date(),
+            modifiedAt: new Date(),
         },
     });
     res.redirect('/folders');

@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
-import { getFolderByIdFromName, getFolderData, getRootFolderData } from './folderPrisma.js';
+import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import prisma from '../database/prismaClient.js';
 
 const foldersGet = async (req: Request, res: Response) => {
@@ -58,7 +58,7 @@ const folderEdit = async (req: Request, res: Response) => {
     },
     data: {
       name: folderName,
-      ModifiedAt: new Date(),
+      modifiedAt: new Date(),
     },
   });
 
