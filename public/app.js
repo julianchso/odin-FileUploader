@@ -11,7 +11,6 @@ import { configDotenv } from 'dotenv';
 import authRouter from './auth/authRouter.js';
 import folderRouter from './folders/folderRouter.js';
 import fileRouter from './files/fileRouter.js';
-// import { PrismaClient } from '@prisma/client';
 import prisma from './database/prismaClient.js';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 configDotenv();

@@ -24,9 +24,7 @@
       <ul>
         <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %> <% if
         (childFolder.type == "FOLDER") { %>
-        <a href="/folders/<%= childFolder.id %>" class="font-semibold border-solid bg-red-100">
-          <%= childFolder.name %>
-        </a>
+        <a href="/folders/<%= childFolder.id %>" class=""> <%= childFolder.name %> </a>
         <% } else if (childFolder.type == "FILE") { %>
         <button
           type="reset"

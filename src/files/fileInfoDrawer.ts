@@ -4,6 +4,17 @@ const openFileDrawer: HTMLElement | null = document.querySelector('#open-file-dr
 const openDrawerBtns: NodeListOf<HTMLButtonElement> | null =
   document.querySelectorAll('.open-drawer');
 
+const drawer = document.querySelector('#drawer-overview') as
+  | (HTMLElement & { open: boolean })
+  | null;
+const openButton = drawer?.nextElementSibling;
+
+openButton?.addEventListener('click', () => {
+  if (drawer) {
+    drawer.open = true;
+  }
+});
+
 openDrawerBtns.forEach((btn) => {
   console.log('open drawer');
   return;
