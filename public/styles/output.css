@@ -223,6 +223,9 @@
       --tw-inset-ring-color: color-mix(in oklab, var(--color-white) 5%, transparent);
     }
   }
+  .drawer-md {
+    --size: 30rem;
+  }
   .hover\:bg-white\/20 {
     &:hover {
       @media (hover: hover) {

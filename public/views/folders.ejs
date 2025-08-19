@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
     />
+    <link rel="stylesheet" href="../styles/output.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -26,16 +27,17 @@
     </div>
 
     <!-- File Info Component -->
-    <wa-drawer label="Drawer" id="drawer-overview">
+    <!-- <wa-drawer label="Drawer" id="drawer-overview" style="--size: 30rem"> -->
+    <wa-drawer label="Drawer" id="drawer-overview" class="drawer-md">
       <h4>File Info</h4>
       <div class="drawer-content"></div>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       <wa-button slot="footer" variant="brand" data-drawer="close">Close</wa-button>
-      <wa-button>Share</wa-button>
-      <form action="/file/delete">
+      <wa-button slot="footer">Share</wa-button>
+      <form action="/file/delete" slot="footer">
         <wa-button>Delete</wa-button>
       </form>
-      <wa-button>Download</wa-button>
+      <wa-button slot="footer">Download</wa-button>
     </wa-drawer>
 
     <wa-button>Open Drawer</wa-button>
@@ -105,12 +107,5 @@
       type="module"
       src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
     ></script>
-
-    <!-- <script>
-      const drawer = document.querySelector('#drawer-overview');
-      const openButton = drawer.nextElementSibling;
-
-      openButton.addEventListener('click', () => (drawer.open = true));
-    </script> -->
   </body>
 </html>

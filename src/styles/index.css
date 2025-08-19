@@ -13,3 +13,16 @@
 
 @layer components {
 }
+
+@utility drawer-sm {
+  --size: 20rem;
+}
+@utility drawer-md {
+  --size: 30rem;
+}
+@utility drawer-lg {
+  --size: 40rem;
+}
+@utility drawer-full {
+  --size: 100vw;
+}

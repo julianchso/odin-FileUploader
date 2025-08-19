@@ -45,6 +45,7 @@ const getRootFolderData = async (userId) => {
     const folders = await getRootByUserId(userId);
     return { files: folders };
 };
+// TODO: This function is running twice and folder throwing null the second time?
 const getFolderData = async (folderId) => {
     const folder = await getFolderById(folderId);
     if (!folder) {
