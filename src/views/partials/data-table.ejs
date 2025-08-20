@@ -26,14 +26,18 @@
         (childFolder.type == "FOLDER") { %>
         <a href="/folders/<%= childFolder.id %>" class=""> <%= childFolder.name %> </a>
         <% } else if (childFolder.type == "FILE") { %>
-        <button
+        <wa-button
           type="reset"
-          class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20"
+          class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-blue-800 inset-ring inset-ring-white/5 hover:bg-white/20 data-<%=childFolder.id%> open-drawer-btn drawer-md"
         >
           <%= childFolder.name %>
-        </button>
-        <% } %> <% }); %> <% } %>
+        </wa-button>
+        <% } }); } %>
       </ul>
     </div>
   </div>
+  <script
+    type="module"
+    src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+  ></script>
 </html>
