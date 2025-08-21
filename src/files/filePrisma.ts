@@ -1,3 +1,4 @@
+import { id } from 'zod/locales';
 import prisma from '../database/prismaClient.js';
 
 const createNewFile = async (
@@ -19,4 +20,12 @@ const createNewFile = async (
   });
 };
 
-export { createNewFile };
+const getFileInfo = async (id: string) => {
+  return await prisma.metadata.findUnique({
+    where: {
+      id: id,
+    },
+  });
+};
+
+export { createNewFile, getFileInfo };

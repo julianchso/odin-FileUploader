@@ -11,4 +11,11 @@ const createNewFile = async (name, mimetype, userId, parentFolderId, size) => {
         },
     });
 };
-export { createNewFile };
+const getFileInfo = async (id) => {
+    return await prisma.metadata.findUnique({
+        where: {
+            id: id,
+        },
+    });
+};
+export { createNewFile, getFileInfo };
