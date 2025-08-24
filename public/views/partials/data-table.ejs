@@ -33,8 +33,11 @@
         >
           <%= childFolder.name %>
         </wa-button>
-        // TODO
-        <input type="text" name="fileInfo" value="<%= JSON.stringify(childFolder) %>" />
+        <div
+          name="fileInfo"
+          class="fileInfo"
+          data-file-info="<%= JSON.stringify(childFolder) %>"
+        ></div>
         <% } }); } %>
       </ul>
     </div>

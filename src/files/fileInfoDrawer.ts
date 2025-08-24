@@ -1,22 +1,80 @@
-// https://github.com/columk1/file-uploader/blob/9d61314fd1643b03f677871f6e5da58d4be99128/src/javascript/publicFolder.js#L28
-
-// import { getFileInfo } from './filePrisma.js';
-
 const drawer = document.querySelector<HTMLElement | (null & { open: boolean })>('.drawer-overview');
 const openDrawerBtns = document.querySelectorAll<HTMLElement>('.open-drawer-btn');
+const drawerContent = document.querySelector<HTMLElement>('.drawer-content');
+
+interface Info {
+  id: string;
+  name: string;
+  size: number;
+  type: string;
+  mimetype: string;
+  createdAt: string;
+  modifiedAt: string;
+  parentfolderid: string | null;
+  userid: string;
+}
 
 openDrawerBtns.forEach((openButton) => {
-  openButton.addEventListener('click', () => {
+  openButton.addEventListener('click', (e) => {
     (drawer as any).open = true;
+    const fileInfoClass = (e.currentTarget as HTMLElement).nextElementSibling as HTMLElement | null;
 
-    // const fileId = openButton.getAttribute('data-fileId');
+    // console.log(fileInfoClass);
+    let fileInfo = fileInfoClass?.dataset.fileInfo;
 
-    // if (typeof fileId === 'string') {
-    //   const info = getFileInfo(fileId);
-    //   console.log(info);
-    // }
+    if (fileInfo) {
+      const parsed = JSON.parse(fileInfo) as Info;
+      displayFileInfo(parsed);
+      console.log(parsed);
+    }
   });
 });
+
+const displayFileInfo = (info: Info) => {
+  const name = document.createElement('div');
+  const nameLabel = document.createElement('span');
+  const nameValue = document.createElement('span');
+  nameLabel.textContent = 'Name: ';
+  nameValue.textContent = info.name;
+  name.append(nameLabel, nameValue);
+
+  const size = document.createElement('div');
+  const sizeLabel = document.createElement('span');
+  const sizeValue = document.createElement('span');
+  sizeLabel.textContent = 'Size: ';
+  sizeValue.textContent = info.size.toString();
+  size.append(sizeLabel, sizeValue);
+
+  const type = document.createElement('div');
+  const typeLabel = document.createElement('span');
+  const typeValue = document.createElement('span');
+  typeLabel.textContent = 'File Type: ';
+  typeValue.textContent = info.type;
+  type.append(typeLabel, typeValue);
+
+  const createdAt = document.createElement('div');
+  const createdAtLabel = document.createElement('span');
+  const createdAtValue = document.createElement('span');
+  createdAtLabel.textContent = 'Created at: ';
+  createdAtValue.textContent = info.createdAt.toString();
+  createdAt.append(createdAtLabel, createdAtValue);
+
+  const modifiedAt = document.createElement('div');
+  const modifiedAtLabel = document.createElement('span');
+  const modifiedAtValue = document.createElement('span');
+  modifiedAtLabel.textContent = 'Modified at: ';
+  modifiedAtValue.textContent = info.modifiedAt.toString();
+  modifiedAt.append(modifiedAtLabel, modifiedAtValue);
+
+  if (drawerContent && drawer) {
+    drawerContent.innerHTML = '';
+    drawerContent.append(name);
+    drawerContent.append(size);
+    drawerContent.append(type);
+    drawerContent.append(createdAt);
+    drawerContent.append(modifiedAt);
+  }
+};
 
 openDrawerBtns.forEach((btn) => {
   return;
