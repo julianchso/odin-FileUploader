@@ -75,12 +75,3 @@ const displayFileInfo = (info: Info) => {
     drawerContent.append(modifiedAt);
   }
 };
-
-openDrawerBtns.forEach((btn) => {
-  return;
-  // btn.addEventListener('click', () => {
-  //   if (openFileDrawer) {
-  //     openFileDrawer.show();
-  //   }
-  // });
-});

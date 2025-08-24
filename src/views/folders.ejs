@@ -12,18 +12,18 @@
   </head>
   <body>
     <div><%- include('./partials/navbar.ejs'); %></div>
-    <div><%- include('./partials/data-table.ejs'); %></div>
-    <% if (currentUser) { %>
-    <div><%- include('./partials/sidebar.ejs') %></div>
-    <% }; %>
-    <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
+    <div class="grid grid-cols-2">
+      <div>
+        <% if (currentUser) { %>
+        <div><%- include('./partials/sidebar.ejs') %></div>
+        <% }; %>
 
-    <h1>Home</h1>
+        <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
+      </div>
 
-    <div>
-      <div>Name</div>
-      <div>Last Modified</div>
-      <div>File Size</div>
+      <div>
+        <div><%- include('./partials/data-table.ejs'); %></div>
+      </div>
     </div>
 
     <!-- File Info Component -->

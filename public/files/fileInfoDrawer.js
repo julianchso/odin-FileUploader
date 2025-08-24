@@ -54,12 +54,4 @@ const displayFileInfo = (info) => {
         drawerContent.append(modifiedAt);
     }
 };
-openDrawerBtns.forEach((btn) => {
-    return;
-    // btn.addEventListener('click', () => {
-    //   if (openFileDrawer) {
-    //     openFileDrawer.show();
-    //   }
-    // });
-});
 export {};
