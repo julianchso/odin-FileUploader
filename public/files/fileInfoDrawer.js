@@ -5,7 +5,7 @@ openDrawerBtns.forEach((openButton) => {
     openButton.addEventListener('click', (e) => {
         drawer.open = true;
         const fileInfoClass = e.currentTarget.nextElementSibling;
-        // console.log(fileInfoClass);
+        console.log(fileInfoClass);
         let fileInfo = fileInfoClass?.dataset.fileInfo;
         if (fileInfo) {
             const parsed = JSON.parse(fileInfo);

@@ -19,7 +19,7 @@ openDrawerBtns.forEach((openButton) => {
     (drawer as any).open = true;
     const fileInfoClass = (e.currentTarget as HTMLElement).nextElementSibling as HTMLElement | null;
 
-    // console.log(fileInfoClass);
+    console.log(fileInfoClass);
     let fileInfo = fileInfoClass?.dataset.fileInfo;
 
     if (fileInfo) {
