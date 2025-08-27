@@ -1,3 +1,5 @@
+import { format } from 'date-fns/fp';
+
 const drawer = document.querySelector<HTMLElement | (null & { open: boolean })>('.drawer-overview');
 const openDrawerBtns = document.querySelectorAll<HTMLElement>('.open-drawer-btn');
 const drawerContent = document.querySelector<HTMLElement>('.drawer-content');
@@ -52,11 +54,13 @@ const displayFileInfo = (info: Info) => {
   typeValue.textContent = info.type;
   type.append(typeLabel, typeValue);
 
+  const createdAtTime = format(info.createdAt, 'MM/dd/yyyy h:m:ss');
+  console.log(`createdAtTime: ${createdAtTime}`);
   const createdAt = document.createElement('div');
   const createdAtLabel = document.createElement('span');
   const createdAtValue = document.createElement('span');
   createdAtLabel.textContent = 'Created at: ';
-  createdAtValue.textContent = info.createdAt.toString();
+  createdAtValue.textContent = createdAtTime.toString();
   createdAt.append(createdAtLabel, createdAtValue);
 
   const modifiedAt = document.createElement('div');

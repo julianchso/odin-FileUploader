@@ -11,10 +11,11 @@
   <div>
     <div class="grid-container">
       <div class="grid-header">
-        <a href="#">Name</a>
-        <a href="#">Date Modified</a>
+        <a href="#" class="col-span-2">Name</a>
         <a href="#">Type</a>
         <a href="#">File Size</a>
+        <a href="#">Date Created</a>
+        <a href="#">Date Modified</a>
       </div>
       <div class="grid-body">
         <% if (folderData.files.length === 0) {%>
@@ -22,16 +23,13 @@
         <%} %> <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %>
         <div class="grid-row">
           <% if (childFolder.type == "FOLDER") { %>
-          <div>
+          <div class="col-span-2">
             <a href="/folders/<%= childFolder.id %>" class=""> <%= childFolder.name %> </a>
           </div>
-          <div>
-            —
-            <!-- placeholder for size -->
-          </div>
-          <div>
-            <!-- placeholder for type -->
-          </div>
+          <div>—</div>
+          <!-- placeholder for size -->
+          <div>—</div>
+          <!-- placeholder for type -->
           <div><%= childFolder.createdAt %></div>
           <div><%= childFolder.modifiedAt %></div>
           <% } else if (childFolder.type == "FILE") { %>

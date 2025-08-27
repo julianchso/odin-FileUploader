@@ -167,6 +167,9 @@
   }
 }
 @layer utilities {
+  .col-span-2 {
+    grid-column: span 2 / span 2;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -401,7 +404,35 @@
   }
 }
 @layer utilities;
-@layer components;
+@layer components {
+  .layout {
+    display: grid;
+    grid-template-columns: [first] 25% [second] 75%;
+  }
+  .layout__sidebar {
+    padding: 20px;
+  }
+  .layout__main {
+    padding: 20px;
+  }
+  .grid-container {
+    display: grid;
+    width: 100%;
+    padding: 20px;
+  }
+  .grid-header {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 3fr 2fr 1fr 2fr 2fr;
+    align-items: center;
+  }
+  .grid-row {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 3fr 2fr 1fr 2fr 2fr;
+    gap: 10px 0;
+  }
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;

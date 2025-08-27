@@ -13,16 +13,16 @@
   <body>
     <div><%- include('./partials/navbar.ejs'); %></div>
     <div>
-      <div>
-        <% if (currentUser) { %>
-        <div><%- include('./partials/sidebar.ejs') %></div>
-        <% }; %>
+      <div class="layout">
+        <div class="layout__sidebar">
+          <% if (currentUser) { %>
+          <div><%- include('./partials/sidebar.ejs') %></div>
+          <% }; %>
 
-        <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
-      </div>
+          <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
+        </div>
 
-      <div>
-        <div><%- include('./partials/data-table.ejs'); %></div>
+        <div class="layout__main"><%- include('./partials/data-table.ejs'); %></div>
       </div>
     </div>
 
