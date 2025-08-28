@@ -1,4 +1,4 @@
-import { format } from 'date-fns/fp';
+import formatDate from '../utils/formatDateUtils.js';
 const drawer = document.querySelector('.drawer-overview');
 const openDrawerBtns = document.querySelectorAll('.open-drawer-btn');
 const drawerContent = document.querySelector('.drawer-content');
@@ -34,19 +34,19 @@ const displayFileInfo = (info) => {
     typeLabel.textContent = 'File Type: ';
     typeValue.textContent = info.type;
     type.append(typeLabel, typeValue);
-    const createdAtTime = format(info.createdAt, 'MM/dd/yyyy h:m:ss');
-    console.log(`createdAtTime: ${createdAtTime}`);
+    const createdAtTime = formatDate(info.createdAt);
     const createdAt = document.createElement('div');
     const createdAtLabel = document.createElement('span');
     const createdAtValue = document.createElement('span');
     createdAtLabel.textContent = 'Created at: ';
     createdAtValue.textContent = createdAtTime.toString();
     createdAt.append(createdAtLabel, createdAtValue);
+    const modifiedAtTime = formatDate(info.modifiedAt);
     const modifiedAt = document.createElement('div');
     const modifiedAtLabel = document.createElement('span');
     const modifiedAtValue = document.createElement('span');
     modifiedAtLabel.textContent = 'Modified at: ';
-    modifiedAtValue.textContent = info.modifiedAt.toString();
+    modifiedAtValue.textContent = modifiedAtTime.toString();
     modifiedAt.append(modifiedAtLabel, modifiedAtValue);
     if (drawerContent && drawer) {
         drawerContent.innerHTML = '';

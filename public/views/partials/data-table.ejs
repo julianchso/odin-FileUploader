@@ -42,7 +42,7 @@
               <div><%= childFolder.name %></div>
               <div><%= childFolder.size %></div>
               <div><%= childFolder.type %></div>
-              <div><%= childFolder.createdAt %></div>
+              <div><%= formatDateUtils.formatDate(childFolder.createdAt) %></div>
               <div><%= childFolder.modifiedAt %></div>
             </wa-button>
             <div

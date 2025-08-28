@@ -1,6 +1,7 @@
 import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
 import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import prisma from '../database/prismaClient.js';
+import formatDate from '../utils/formatDateUtils.js';
 const foldersGet = async (req, res) => {
     const user = req.session.passport?.user;
     const userId = req.user?.id;
@@ -22,6 +23,7 @@ const foldersGet = async (req, res) => {
         folders: folders,
         parentFolderId: folderId,
         folderData: folderData,
+        formatDate,
     });
 };
 const foldersPost = async (req, res) => {
