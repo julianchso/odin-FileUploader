@@ -1,5 +1,5 @@
-import { format } from 'https://esm.sh/date-fns';
-import formatDate from '../utils/formatDateUtils.js';
+// import { format } from 'https://esm.sh/date-fns';
+// import formatDate from '../utils/formatDateUtils.js';
 
 const drawer = document.querySelector<HTMLElement | (null & { open: boolean })>('.drawer-overview');
 const openDrawerBtns = document.querySelectorAll<HTMLElement>('.open-drawer-btn');
@@ -55,20 +55,20 @@ const displayFileInfo = (info: Info) => {
   typeValue.textContent = info.type;
   type.append(typeLabel, typeValue);
 
-  const createdAtTime = formatDate(info.createdAt);
+  // const createdAtTime = formatDate(info.createdAt);
   const createdAt = document.createElement('div');
   const createdAtLabel = document.createElement('span');
   const createdAtValue = document.createElement('span');
   createdAtLabel.textContent = 'Created at: ';
-  createdAtValue.textContent = createdAtTime.toString();
+  createdAtValue.textContent = info.createdAt.toString();
   createdAt.append(createdAtLabel, createdAtValue);
 
-  const modifiedAtTime = formatDate(info.modifiedAt);
+  // const modifiedAtTime = formatDate(info.modifiedAt);
   const modifiedAt = document.createElement('div');
   const modifiedAtLabel = document.createElement('span');
   const modifiedAtValue = document.createElement('span');
   modifiedAtLabel.textContent = 'Modified at: ';
-  modifiedAtValue.textContent = modifiedAtTime.toString();
+  modifiedAtValue.textContent = info.modifiedAt.toString();
   modifiedAt.append(modifiedAtLabel, modifiedAtValue);
 
   if (drawerContent && drawer) {

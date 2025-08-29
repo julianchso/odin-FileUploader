@@ -21,38 +21,40 @@
         <% if (folderData.files.length === 0) {%>
         <div>No files or folders to display.</div>
         <%} %> <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %>
-        <div class="grid-row">
-          <% if (childFolder.type == "FOLDER") { %>
-          <div class="col-span-2">
-            <a href="/folders/<%= childFolder.id %>" class=""> <%= childFolder.name %> </a>
-          </div>
+        <!-- <div class="grid-row"> -->
+        <% if (childFolder.type == "FOLDER") { %>
+        <!-- <div class="grid-row"> -->
+        <a href="/folders/<%= childFolder.id %>" class="grid-row">
+          <div class="col-span-2"><%= childFolder.name %></div>
           <div>—</div>
           <!-- placeholder for size -->
           <div>—</div>
           <!-- placeholder for type -->
           <div><%= childFolder.createdAt %></div>
           <div><%= childFolder.modifiedAt %></div>
-          <% } else if (childFolder.type == "FILE") { %>
-          <div>
-            <wa-button
-              type="reset"
-              class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-blue-800 inset-ring inset-ring-white/5 hover:bg-white/20 open-drawer-btn drawer-md"
-              data-fileId="<%=childFolder.id%>"
-            >
-              <div><%= childFolder.name %></div>
-              <div><%= childFolder.size %></div>
-              <div><%= childFolder.type %></div>
-              <div><%= formatDateUtils.formatDate(childFolder.createdAt) %></div>
-              <div><%= childFolder.modifiedAt %></div>
-            </wa-button>
-            <div
-              name="fileInfo"
-              class="fileInfo hidden"
-              data-file-info="<%= JSON.stringify(childFolder) %>"
-            ></div>
-          </div>
-          <% } %>
+        </a>
+        <!-- </div> -->
+        <% } else if (childFolder.type == "FILE") { %>
+        <div class="grid-row">
+          <wa-button
+            type="reset"
+            class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-blue-800 inset-ring inset-ring-white/5 hover:bg-white/20 open-drawer-btn drawer-md"
+            data-fileId="<%=childFolder.id%>"
+          >
+            <div><%= childFolder.name %></div>
+            <div><%= childFolder.size %></div>
+            <div><%= childFolder.type %></div>
+            <div><%= childFolder.createdAt %></div>
+            <div><%= childFolder.modifiedAt %></div>
+          </wa-button>
+          <div
+            name="fileInfo"
+            class="fileInfo hidden"
+            data-file-info="<%= JSON.stringify(childFolder) %>"
+          ></div>
         </div>
+        <% } %>
+        <!-- </div> -->
         <% }); %> <% } %>
       </div>
     </div>
