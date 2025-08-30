@@ -3,56 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
+    />
+    <link rel="stylesheet" href="../styles/output.css" />
+
     <title></title>
   </head>
   <body>
     <a href="/folders/"><%= currentUser.username %></a>
-    <% folders.forEach((folder) => { %>
-    <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
     <div class="container">
+      <% folders.forEach((folder) => { %>
       <div class="btn-wrapper">
-        <div>
-          <button>
-            <svg
-              width="15px"
-              height="15px"
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-              class="bi bi-three-dots-vertical"
-            >
-              <path
-                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-              />
-            </svg>
-          </button>
-        </div>
-        <div class="dropdown">
-          <ul>
-            <li>
-              <a
-                href="#"
-                class="editFolderModalOpenBtn"
-                data-id="<%= folder.id %>"
-                data-name="<%= folder.name %>"
-                ><span>Rename</span></a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="deleteFolderModalOpenBtn"
-                data-id="<%= folder.id %>"
-                data-name="<%= folder.name %>"
-                ><span>Delete</span></a
-              >
-            </li>
-          </ul>
+        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+        <button class="dropdownBtn">
+          <svg
+            width="15px"
+            height="15px"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+            class="bi bi-three-dots-vertical"
+          >
+            <path
+              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+            />
+          </svg>
+        </button>
+        <div class="dropdown-content">
+          <div
+            class="editFolderModalOpenBtn"
+            data-id="<%= folder.id %>"
+            data-name="<%= folder.name %>"
+          >
+            <span>Rename</span>
+          </div>
+          <div
+            class="deleteFolderModalOpenBtn"
+            data-id="<%= folder.id %>"
+            data-name="<%= folder.name %>"
+          >
+            <span>Delete</span>
+          </div>
         </div>
       </div>
+      <% }); %>
     </div>
-    <% }); %>
   </body>
   <script type="module" src="../../folders/editFolder.js"></script>
-  <script type="module" src="../../folders/deleteFolder.js"></script>
+  <script
+    type="module"
+    src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+  ></script>
 </html>
