@@ -1,9 +1,13 @@
 <body>
   <ul>
     <% if (currentUser) { %>
-    <div class=>
-      <li><button id="newFileModalOpenBtn" class="sidebarBtn">New File</button></li>
-      <li><button id="newFolderModalOpenBtn" class="sidebarBtn">New Folder</button></li>
+    <div class="flex flex-col gap-2 w-full">
+      <li>
+        <button id="newFileModalOpenBtn" class="sidebarBtn">New File</button>
+      </li>
+      <li>
+        <button id="newFolderModalOpenBtn" class="sidebarBtn">New Folder</button>
+      </li>
     </div>
     <% } %>
   </ul>

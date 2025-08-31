@@ -11,7 +11,7 @@
   <div>
     <div class="grid-container">
       <div class="grid-header">
-        <a href="#" class="col-span-2">Name</a>
+        <a href="#">Name</a>
         <a href="#">Type</a>
         <a href="#">File Size</a>
         <a href="#">Date Created</a>
@@ -20,12 +20,10 @@
       <div class="grid-body">
         <% if (folderData.files.length === 0) {%>
         <div>No files or folders to display.</div>
-        <%} %> <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %>
-        <!-- <div class="grid-row"> -->
-        <% if (childFolder.type == "FOLDER") { %>
-        <!-- <div class="grid-row"> -->
-        <a href="/folders/<%= childFolder.id %>" class="grid-row">
-          <div class="col-span-2"><%= childFolder.name %></div>
+        <%} %> <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %> <% if
+        (childFolder.type == "FOLDER") { %>
+        <a href="/folders/<%= childFolder.id %>" class="grid-row items-center">
+          <div><%= childFolder.name %></div>
           <div>—</div>
           <!-- placeholder for size -->
           <div>—</div>
@@ -35,7 +33,7 @@
         </a>
         <!-- </div> -->
         <% } else if (childFolder.type == "FILE") { %>
-        <div class="grid-row">
+        <div class="grid-row items-center">
           <wa-button
             type="reset"
             class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-blue-800 inset-ring inset-ring-white/5 hover:bg-white/20 open-drawer-btn drawer-md"

@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="../styles/output.css" />
     <title><%= title %></title>
   </head>
-  <body class="bg-neutral-800 text-sky-600">
+  <body class="bg-neutral-800 text-bright-aqua h-screen m-auto">
     <%- include('./partials/navbar.ejs'); %>
     <div>
       <div class="layout">
-        <div class="layout__sidebar">
+        <div class="layout__sidebar border-solid border-dark-aqua border">
           <% if (currentUser) { %>
           <div><%- include('./partials/sidebar.ejs') %></div>
           <% }; %>
@@ -22,7 +22,9 @@
           <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
         </div>
 
-        <div class="layout__main"><%- include('./partials/data-table.ejs'); %></div>
+        <div class="layout__main border-solid border-dark-aqua border">
+          <%- include('./partials/data-table.ejs'); %>
+        </div>
       </div>
     </div>
 
