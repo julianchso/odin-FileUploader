@@ -38,6 +38,7 @@ const displayFileInfo = (info: Info) => {
   const nameLabel = document.createElement('span');
   const nameValue = document.createElement('span');
   nameLabel.textContent = 'Name: ';
+  nameLabel.style.fontWeight = 'bold';
   nameValue.textContent = info.name;
   name.append(nameLabel, nameValue);
 
@@ -45,6 +46,7 @@ const displayFileInfo = (info: Info) => {
   const sizeLabel = document.createElement('span');
   const sizeValue = document.createElement('span');
   sizeLabel.textContent = 'Size: ';
+  sizeLabel.style.fontWeight = 'bold';
   sizeValue.textContent = info.size.toString();
   size.append(sizeLabel, sizeValue);
 
@@ -52,6 +54,7 @@ const displayFileInfo = (info: Info) => {
   const typeLabel = document.createElement('span');
   const typeValue = document.createElement('span');
   typeLabel.textContent = 'File Type: ';
+  typeLabel.style.fontWeight = 'bold';
   typeValue.textContent = info.type;
   type.append(typeLabel, typeValue);
 
@@ -60,6 +63,7 @@ const displayFileInfo = (info: Info) => {
   const createdAtLabel = document.createElement('span');
   const createdAtValue = document.createElement('span');
   createdAtLabel.textContent = 'Created at: ';
+  createdAtLabel.style.fontWeight = 'bold';
   createdAtValue.textContent = info.createdAt.toString();
   createdAt.append(createdAtLabel, createdAtValue);
 
@@ -68,6 +72,7 @@ const displayFileInfo = (info: Info) => {
   const modifiedAtLabel = document.createElement('span');
   const modifiedAtValue = document.createElement('span');
   modifiedAtLabel.textContent = 'Modified at: ';
+  modifiedAtLabel.style.fontWeight = 'bold';
   modifiedAtValue.textContent = info.modifiedAt.toString();
   modifiedAt.append(modifiedAtLabel, modifiedAtValue);
 

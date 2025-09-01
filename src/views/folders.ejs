@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="../styles/output.css" />
     <title><%= title %></title>
   </head>
-  <body class="bg-neutral-800 text-bright-aqua h-screen m-auto">
+  <body class="bg-neutral-800 h-screen m-auto">
     <%- include('./partials/navbar.ejs'); %>
     <div>
       <div class="layout">
-        <div class="layout__sidebar border-solid border-dark-aqua border">
+        <div class="layout__sidebar border-solid border-dark-aqua border-r-[1px]">
           <% if (currentUser) { %>
           <div><%- include('./partials/sidebar.ejs') %></div>
           <% }; %>
@@ -22,16 +22,13 @@
           <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
         </div>
 
-        <div class="layout__main border-solid border-dark-aqua border">
-          <%- include('./partials/data-table.ejs'); %>
-        </div>
+        <div class="layout__main"><%- include('./partials/data-table.ejs'); %></div>
       </div>
     </div>
 
     <!-- File Info Component -->
-    <wa-drawer label="Drawer" class="drawer-md drawer-overview">
-      <h4>File Info</h4>
-      <div class="drawer-content"></div>
+    <wa-drawer label="File Info" class="drawer-overview">
+      <div class="drawer-content text-md fileInfoText"></div>
       <wa-button slot="footer" variant="brand" data-drawer="close">Close</wa-button>
       <wa-button slot="footer">Share</wa-button>
       <form action="/file/delete" slot="footer">

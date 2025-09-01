@@ -14,8 +14,13 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 
 @layer components {
+  body {
+    font-size: 0.75rem;
+    color: var(--color-dark-aqua);
+  }
+
   .color-primary {
-    color: --color-bright-aqua;
+    color: var(--color-dark-aqua);
   }
 
   .layout {
@@ -40,30 +45,33 @@
   .grid-header {
     display: grid;
     width: auto;
-    grid-template-columns: 3fr 2fr 1fr 2fr 2fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     align-items: center;
   }
 
   .grid-row {
     display: grid;
     width: auto;
-    grid-template-columns: 3fr 2fr 1fr 2fr 2fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     gap: 10px 0;
+  }
+
+  .btn-wrapper:hover {
+    transition: 0.2s ease-in;
+    border-left: #72c5d4 solid 5px;
   }
 
   .sidebarBtn {
     width: 100%;
     padding: 0 10px;
-    border: rgb(125, 125, 125) solid 2px;
-    border-radius: 5px;
+    border: rgb(125, 125, 125) solid 1px;
     justify-content: flex-start;
     align-items: center;
   }
 
   .sidebarBtn:hover {
-    background-color: #addde6;
     transition: 0.2s ease-in;
-    border: #72c5d4 solid 2px;
+    border-left: #72c5d4 solid 5px;
   }
 
   .dropdownBtn {
@@ -87,6 +95,17 @@
 
   .show {
     display: block;
+  }
+
+  .svg-icon {
+    fill: var(--color-dark-aqua);
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+  }
+
+  .fileInfoText {
+    font-size: 1rem;
   }
 }
 
