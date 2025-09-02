@@ -27,4 +27,31 @@ const getFileInfo = async (id: string) => {
   });
 };
 
-export { createNewFile, getFileInfo };
+const getBreadcrumbs = async (id: string, breadcrumbs: Array<string> = []) => {
+  let currentId: string | undefined = id;
+
+  const folder = await prisma.metadata.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      id: true,
+      name: true,
+      parentFolderId: true,
+    },
+  });
+
+  if (folder) {
+    breadcrumbs.unshift(folder.name);
+  }
+
+  if (folder?.parentFolderId) {
+    currentId = folder.parentFolderId;
+    getBreadcrumbs(currentId, breadcrumbs);
+  } else {
+    console.log(`breadcrumbs inside if: ${breadcrumbs}`);
+    return breadcrumbs;
+  }
+};
+
+export { createNewFile, getBreadcrumbs, getFileInfo };

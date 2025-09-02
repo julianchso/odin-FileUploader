@@ -21,8 +21,10 @@
 
           <aside><%- include('./partials/tree.ejs', {folders: folders}); %></aside>
         </div>
-
-        <div class="layout__main"><%- include('./partials/data-table.ejs'); %></div>
+        <div class="flex flex-col w-full">
+          <div><%- include('./partials/breadcrumbs.ejs'); %></div>
+          <div class="layout__main"><%- include('./partials/data-table.ejs'); %></div>
+        </div>
       </div>
     </div>
 

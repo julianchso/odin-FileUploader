@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
 import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import prisma from '../database/prismaClient.js';
+import { getBreadcrumbs } from '../files/filePrisma.js';
 // import formatDate from '../utils/formatDateUtils.js';
 
 const foldersGet = async (req: Request, res: Response) => {
@@ -21,6 +22,10 @@ const foldersGet = async (req: Request, res: Response) => {
     folderData = await getFolderData(folderId);
   } else if (userId) {
     folderData = await getRootFolderData(userId);
+  }
+
+  if (folderId) {
+    getBreadcrumbs(folderId);
   }
 
   res.render('folders', {
