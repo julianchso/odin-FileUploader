@@ -27,7 +27,7 @@ const getFileInfo = async (id: string) => {
   });
 };
 
-const getBreadcrumbs = async (id: string, breadcrumbs: Array<string> = []) => {
+const getBreadcrumbs = async (id: string, breadcrumbs: Breadcrumbs[] = []) => {
   let currentId: string | undefined = id;
 
   const folder = await prisma.metadata.findUnique({
@@ -42,12 +42,12 @@ const getBreadcrumbs = async (id: string, breadcrumbs: Array<string> = []) => {
   });
 
   if (folder) {
-    breadcrumbs.unshift(folder.name);
+    breadcrumbs.unshift({ id: folder.id, folderName: folder.name });
   }
 
   if (folder?.parentFolderId) {
     currentId = folder.parentFolderId;
-    getBreadcrumbs(currentId, breadcrumbs);
+    return getBreadcrumbs(currentId, breadcrumbs);
   } else {
     console.log(`breadcrumbs inside if: ${breadcrumbs}`);
     return breadcrumbs;

@@ -24,8 +24,11 @@ const foldersGet = async (req: Request, res: Response) => {
     folderData = await getRootFolderData(userId);
   }
 
+  let breadcrumbs;
+
   if (folderId) {
-    getBreadcrumbs(folderId);
+    breadcrumbs = await getBreadcrumbs(folderId);
+    console.log(breadcrumbs);
   }
 
   res.render('folders', {
@@ -34,6 +37,7 @@ const foldersGet = async (req: Request, res: Response) => {
     folders: folders,
     parentFolderId: folderId,
     folderData: folderData,
+    breadcrumbs: breadcrumbs,
   });
 };
 

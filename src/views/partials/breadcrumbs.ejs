@@ -7,20 +7,14 @@
   </head>
   <body class="p-5">
     <wa-breadcrumb class="p-5">
-      <wa-breadcrumb-item>Catalog</wa-breadcrumb-item>
-      <wa-breadcrumb-item>Clothing</wa-breadcrumb-item>
-      <wa-breadcrumb-item>Women's</wa-breadcrumb-item>
-      <wa-breadcrumb-item>Shirts &amp; Tops</wa-breadcrumb-item>
+      <% breadcrumbs.forEach(breadcrumb => { %>
+      <wa-breadcrumb-item
+        ><a href="/folders/<%= breadcrumb.id %>"
+          ><%= breadcrumb.folderName %></a
+        ></wa-breadcrumb-item
+      >
+      <% }); %>
     </wa-breadcrumb>
-    <nav aria-label="Breadcrumb" class="breadcrumb">
-      <ol>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Category</a></li>
-        <li><a href="#">Sub Category</a></li>
-        <li><a href="#">Type</a></li>
-        <li><span aria-current="page">Product</span></li>
-      </ol>
-    </nav>
   </body>
   <script
     type="module"

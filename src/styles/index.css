@@ -32,10 +32,6 @@
     padding: 20px;
   }
 
-  .layout__main {
-    padding: 20px;
-  }
-
   .grid-container {
     display: grid;
     width: 100%;
@@ -105,27 +101,6 @@
 
   .fileInfoText {
     font-size: 1rem;
-  }
-
-  /* breadcrumb */
-
-  .breadcrumb {
-    padding: 0 0.5rem;
-  }
-
-  .breadcrumb ol {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    align-items: end;
-  }
-
-  .breadcrumb li:not(:last-child)::after {
-    display: inline-block;
-    margin: 0 0.25rem;
-    content: '>';
   }
 }
 
