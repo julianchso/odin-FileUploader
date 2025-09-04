@@ -6,6 +6,7 @@
     <title>Document</title>
   </head>
   <body class="p-5">
+    <% if (currentUser && breadcrumbs && breadcrumbs.length) { %>
     <wa-breadcrumb class="p-5">
       <% breadcrumbs.forEach(breadcrumb => { %>
       <wa-breadcrumb-item
@@ -15,6 +16,7 @@
       >
       <% }); %>
     </wa-breadcrumb>
+    <%} %>
   </body>
   <script
     type="module"

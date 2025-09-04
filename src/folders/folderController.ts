@@ -3,33 +3,26 @@ import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
 import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import prisma from '../database/prismaClient.js';
 import { getBreadcrumbs } from '../files/filePrisma.js';
-// import formatDate from '../utils/formatDateUtils.js';
 
 const foldersGet = async (req: Request, res: Response) => {
   const user = req.session.passport?.user;
   const userId = req.user?.id;
 
-  const folders = await getFolderTree(userId);
+  const folders = userId ? await getFolderTree(userId) : [];
   const folderId = req.params.folderId;
-
-  let folderData;
 
   if (req.params.folderId) {
     await getFolderById(req.params.folderId);
   }
 
-  if (userId && folderId) {
-    folderData = await getFolderData(folderId);
-  } else if (userId) {
-    folderData = await getRootFolderData(userId);
-  }
+  const folderData =
+    folderId && userId
+      ? await getFolderData(folderId)
+      : userId
+      ? await getRootFolderData(userId)
+      : null;
 
-  let breadcrumbs;
-
-  if (folderId) {
-    breadcrumbs = await getBreadcrumbs(folderId);
-    console.log(breadcrumbs);
-  }
+  const breadcrumbs = folderId ? await getBreadcrumbs(folderId) : [];
 
   res.render('folders', {
     title: 'Home',
