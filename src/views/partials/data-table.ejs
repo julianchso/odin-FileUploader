@@ -19,7 +19,9 @@
       </div>
       <div class="grid grid-body gap-x-2 gap-y-4">
         <% if (folderData.files.length === 0) {%>
-        <div>No files or folders to display.</div>
+        <div class="text-xl col-span-full justify-self-center py-5">
+          No files or folders to display.
+        </div>
         <%} %> <% if (folderData) { %> <% folderData.files.forEach(childFolder => { %> <% if
         (childFolder.type == "FOLDER") { %>
         <a
