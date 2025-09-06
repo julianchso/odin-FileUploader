@@ -29,7 +29,8 @@ enum Type {
 }
 
 model Metadata {
-  id             String         @id @default(uuid())
+  // id             String         @id @default(uuid())
+  id             String         @id
   name           String
   size           Int?
   type           Type
@@ -39,6 +40,7 @@ model Metadata {
   parentFolderId String?
   userId         String
   sharedFolders  SharedFolder[]
+  path           String?
 
   user         User       @relation(fields: [userId], references: [id])
   parentFolder Metadata?  @relation("metadataParent", fields: [parentFolderId], references: [id], onDelete: Cascade)

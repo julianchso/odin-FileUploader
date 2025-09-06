@@ -10,7 +10,7 @@ interface Info {
   name: string;
   size: number;
   type: string;
-  mimetype: string;
+  mimeType: string;
   createdAt: string;
   modifiedAt: string;
   parentfolderid: string | null;
@@ -55,7 +55,7 @@ const displayFileInfo = (info: Info) => {
   const typeValue = document.createElement('span');
   typeLabel.textContent = 'File Type: ';
   typeLabel.style.fontWeight = 'bold';
-  typeValue.textContent = info.type;
+  typeValue.textContent = info.mimeType;
   type.append(typeLabel, typeValue);
 
   // const createdAtTime = formatDate(info.createdAt);

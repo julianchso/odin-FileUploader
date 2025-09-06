@@ -1,20 +1,24 @@
 import prisma from '../database/prismaClient.js';
 
 const createNewFile = async (
+  id: string,
   name: string,
   mimetype: string,
   userId: string,
   parentFolderId: string | null,
-  size: number
+  size: number,
+  path: string
 ) => {
   return await prisma.metadata.create({
     data: {
+      id: id,
       name: name,
       type: 'FILE',
       mimeType: mimetype,
       userId: userId,
       parentFolderId: parentFolderId,
       size: size,
+      path: path,
     },
   });
 };
@@ -49,7 +53,6 @@ const getBreadcrumbs = async (id: string, breadcrumbs: Breadcrumbs[] = []) => {
     currentId = folder.parentFolderId;
     return getBreadcrumbs(currentId, breadcrumbs);
   } else {
-    console.log(`breadcrumbs inside if: ${breadcrumbs}`);
     return breadcrumbs;
   }
 };

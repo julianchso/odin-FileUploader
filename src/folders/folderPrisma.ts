@@ -1,18 +1,26 @@
 import prisma from '../database/prismaClient.js';
 
-const createFolder = async (name: string, userId: string, parentFolderId: string | null) => {
+const createFolder = async (
+  id: string,
+  name: string,
+  userId: string,
+  parentFolderId: string | null,
+  path: string
+) => {
   return await prisma.metadata.create({
     data: {
+      id: id,
       name: name,
       type: 'FOLDER',
       userId: userId,
       parentFolderId: parentFolderId,
+      path: path,
     },
   });
 };
 
 const getFolderTree = async (userId: string | undefined, parentFolderId?: string | null) => {
-  return await prisma.metadata.findMany({
+  const allFolders = await prisma.metadata.findMany({
     where: {
       userId: userId,
       parentFolderId: parentFolderId,
@@ -24,6 +32,12 @@ const getFolderTree = async (userId: string | undefined, parentFolderId?: string
       parentFolder: true,
     },
   });
+
+  const folderTree: [] = [];
+
+  return allFolders;
+
+  // TODO: create parent-child entities object
 };
 
 const getFolderById = async (id: string) => {
@@ -76,12 +90,22 @@ const getFolderByIdFromName = async (name: string) => {
 };
 
 const getUserFoldersFiles = async (userId: string) => {
-  return prisma.metadata.findMany({
+  return await prisma.metadata.findMany({
     where: { userId: userId },
     include: {
       childFolders: true,
     },
   });
+};
+
+const getPath = async (parentId: string) => {
+  const object = await prisma.metadata.findFirst({
+    where: { id: parentId },
+    select: { path: true },
+  });
+  if (object) {
+    return object.path;
+  }
 };
 
 export {
@@ -92,4 +116,5 @@ export {
   getUserFoldersFiles,
   getFolderData,
   getRootFolderData,
+  getPath,
 };

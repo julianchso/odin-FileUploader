@@ -16,7 +16,7 @@
       <a href="/folders/"><%= currentUser.username %></a>
     </div>
     <div class="container">
-      <% folders.forEach((folder) => { %>
+      <% if (folders && folders.length > 0) { %> <% folders.forEach((folder) => { %>
       <div class="btn-wrapper flex items-center justify-between px-2">
         <a href="/folders/<%= folder.id %>" class="max-w-fit"><%= folder.name %></a>
         <button class="dropdownBtn max-w-[20px]">
@@ -91,7 +91,7 @@
           </div>
         </div>
       </div>
-      <% }); %>
+      <% }); %> <% } %>
     </div>
   </body>
   <script type="module" src="../../folders/editFolder.js"></script>

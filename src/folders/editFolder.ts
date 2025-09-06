@@ -52,7 +52,6 @@ function openDropdown() {
 
         // closes other dropdowns if another is open
         if (dropdownAmount > 1) {
-          console.log('inside if function');
           for (let i = 0; i < dropdownOptions.length; i++) {
             const openDropdown = dropdownOptions[i];
             if ((openDropdown as HTMLElement).classList.contains('show') && i !== dropdownCurrent) {

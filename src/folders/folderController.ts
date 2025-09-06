@@ -3,13 +3,19 @@ import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
 import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import prisma from '../database/prismaClient.js';
 import { getBreadcrumbs } from '../files/filePrisma.js';
+import { getPath } from './folderService.js';
 
 const foldersGet = async (req: Request, res: Response) => {
   const user = req.session.passport?.user;
   const userId = req.user?.id;
 
-  const folders = userId ? await getFolderTree(userId) : [];
+  // const folders = userId ? await getFolderTree(userId) : [];
+  const folders = userId ? (await getFolderTree(userId)) ?? [] : [];
   const folderId = req.params.folderId;
+
+  if (folders == undefined) {
+    console.log;
+  }
 
   if (req.params.folderId) {
     await getFolderById(req.params.folderId);
@@ -35,13 +41,21 @@ const foldersGet = async (req: Request, res: Response) => {
 };
 
 const foldersPost = async (req: Request, res: Response) => {
-  const userId = req.user?.id;
-
+  const folderId = crypto.randomUUID();
   const folderName = req.body.newFolderName;
+  const userId = req.user?.id;
   let parentFolderId = req.body.parentFolderId || null;
+  let path;
+
+  if (!userId || !req.isAuthenticated()) {
+    return res.status(401).send('Not authenticated');
+  }
+
+  path = await getPath(userId, parentFolderId, folderId);
+  // const path = userId ? getPath(userId, parentFolderId, folderId) : (()=> {throw new Error ("userId is null")})
 
   if (userId && req.isAuthenticated()) {
-    const newFolder = await createFolder(folderName, userId, parentFolderId);
+    const newFolder = await createFolder(folderId, folderName, userId, parentFolderId, path);
     return res.redirect(`/folders/${newFolder.id}`);
   }
 
