@@ -99,13 +99,27 @@ const getUserFoldersFiles = async (userId: string) => {
 };
 
 const getPath = async (parentId: string) => {
-  const object = await prisma.metadata.findFirst({
+  const entity = await prisma.metadata.findFirst({
     where: { id: parentId },
     select: { path: true },
   });
-  if (object) {
-    return object.path;
+  if (entity) {
+    return entity.path;
   }
+};
+
+const getAllPaths = async (userId: string) => {
+  return await prisma.metadata.findMany({
+    where: { userId: userId },
+    select: { name: true, path: true },
+  });
+};
+
+const getAllFolderNamesIds = async (userId: string) => {
+  return await prisma.metadata.findMany({
+    where: { userId: userId },
+    select: { id: true, name: true },
+  });
 };
 
 export {
@@ -117,4 +131,6 @@ export {
   getFolderData,
   getRootFolderData,
   getPath,
+  getAllPaths,
+  getAllFolderNamesIds,
 };

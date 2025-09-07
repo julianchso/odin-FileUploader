@@ -13,7 +13,6 @@ const fileUploadPost = async (req: Request, res: Response) => {
   const parentFolderId: string | null = req.body.parentFolderId || null;
   const path = await getPath(userId, parentFolderId, fileId);
 
-  // create row in prisma database
   createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
 
   res.redirect(`/folders/${parentFolderId ?? ''}`);

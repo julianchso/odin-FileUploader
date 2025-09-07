@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { createFolder, getFolderById, getFolderTree } from './folderPrisma.js';
 import { getFolderData, getRootFolderData } from './folderPrisma.js';
+import { getFolderTree as getFolderTreeTest } from './folderService.js';
 import prisma from '../database/prismaClient.js';
 import { getBreadcrumbs } from '../files/filePrisma.js';
 import { getPath } from './folderService.js';
@@ -16,6 +17,9 @@ const foldersGet = async (req: Request, res: Response) => {
   if (folders == undefined) {
     console.log;
   }
+  const tree = userId ? (await getFolderTreeTest(userId)) ?? [] : [];
+
+  console.log(`tree: ${tree}`);
 
   if (req.params.folderId) {
     await getFolderById(req.params.folderId);
