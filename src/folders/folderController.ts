@@ -10,16 +10,10 @@ const foldersGet = async (req: Request, res: Response) => {
   const user = req.session.passport?.user;
   const userId = req.user?.id;
 
-  // const folders = userId ? await getFolderTree(userId) : [];
-  const folders = userId ? (await getFolderTree(userId)) ?? [] : [];
+  // const folders = userId ? (await getFolderTree(userId)) ?? [] : [];
   const folderId = req.params.folderId;
 
-  if (folders == undefined) {
-    console.log;
-  }
   const tree = userId ? (await getFolderTreeTest(userId)) ?? [] : [];
-
-  console.log(`tree: ${tree}`);
 
   if (req.params.folderId) {
     await getFolderById(req.params.folderId);
@@ -37,10 +31,11 @@ const foldersGet = async (req: Request, res: Response) => {
   res.render('folders', {
     title: 'Home',
     user: user,
-    folders: folders,
+    // folders: folders,
     parentFolderId: folderId,
     folderData: folderData,
     breadcrumbs: breadcrumbs,
+    tree: tree,
   });
 };
 
@@ -56,7 +51,6 @@ const foldersPost = async (req: Request, res: Response) => {
   }
 
   path = await getPath(userId, parentFolderId, folderId);
-  // const path = userId ? getPath(userId, parentFolderId, folderId) : (()=> {throw new Error ("userId is null")})
 
   if (userId && req.isAuthenticated()) {
     const newFolder = await createFolder(folderId, folderName, userId, parentFolderId, path);

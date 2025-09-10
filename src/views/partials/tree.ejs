@@ -16,25 +16,31 @@
       <a href="/folders/"><%= currentUser.username %></a>
     </div>
     <div class="container">
-      <% if (folders && folders.length > 0) { %> <% folders.forEach((folder) => { %>
-      <div class="btn-wrapper flex items-center justify-between px-2">
-        <a href="/folders/<%= folder.id %>" class="max-w-fit"><%= folder.name %></a>
-        <button class="dropdownBtn max-w-[20px]">
-          <svg
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-            class="bi bi-three-dots-vertical svg-icon"
-          >
-            <path
-              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-            />
-          </svg>
-        </button>
+      <% function renderTree(tree) { %> <% if (tree && tree.length > 0) { %>
+      <ul>
+        <% for (let children of tree) { %>
+        <li>
+          <div class="btn-wrapper flex items-center justify-between px-2">
+            <a href="/folders/<%= children.id %>"><%= children.name %></a>
+            <button class="dropdownBtn max-w-[20px]">
+              <svg
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+                class="bi bi-three-dots-vertical svg-icon"
+              >
+                <path
+                  d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                />
+              </svg>
+            </button>
+          </div>
+        </li>
+        <!-- dropdown for rename and delete -->
         <div class="dropdown-content">
           <div
             class="editFolderModalOpenBtn flex flex-row cursor-pointer"
-            data-id="<%= folder.id %>"
-            data-name="<%= folder.name %>"
+            data-id="<%= children.id %>"
+            data-name="<%= children.name %>"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="svg-icon">
               <defs>
@@ -55,12 +61,12 @@
                 />
               </g>
             </svg>
-            <span class="pl-2.5">Rename</span>
+            <span>Rename</span>
           </div>
           <div
             class="deleteFolderModalOpenBtn flex flex-row cursor-pointer"
-            data-id="<%= folder.id %>"
-            data-name="<%= folder.name %>"
+            data-id="<%= children.id %>"
+            data-name="<%= children.name %>"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,9 +96,13 @@
             <span class="pl-2.5">Delete</span>
           </div>
         </div>
-      </div>
-      <% }); %> <% } %>
+        <% if (children.children && children.children.length > 0) { %> <%
+        renderTree(children.children); %> <%} } %>
+      </ul>
+      <%} } %>
     </div>
+
+    <% renderTree(tree) %>
   </body>
   <script type="module" src="../../folders/editFolder.js"></script>
   <script
