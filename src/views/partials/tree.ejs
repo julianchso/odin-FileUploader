@@ -20,8 +20,7 @@
       <ul>
         <% for (let children of tree) { %>
         <li>
-          <div class="btn-wrapper flex items-center justify-between px-2">
-            <a href="/folders/<%= children.id %>"><%= children.name %></a>
+          <div class="btn-wrapper flex items-center justify-start px-2">
             <button class="dropdownBtn max-w-[20px]">
               <svg
                 viewBox="0 0 16 16"
@@ -33,6 +32,7 @@
                 />
               </svg>
             </button>
+            <a href="/folders/<%= children.id %>"><%= children.name %></a>
           </div>
         </li>
         <!-- dropdown for rename and delete -->
@@ -102,7 +102,7 @@
       <%} } %>
     </div>
 
-    <% renderTree(tree) %>
+    <% renderTree(folders) %>
   </body>
   <script type="module" src="../../folders/editFolder.js"></script>
   <script

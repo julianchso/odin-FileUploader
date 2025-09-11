@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { createNewFile } from './filePrisma.js';
 import { getPath } from '../folders/folderService.js';
+import { uploadFile } from '../storage/storageController.js';
 
 const fileUploadPost = async (req: Request, res: Response) => {
   if (!req.file) {
@@ -13,7 +14,15 @@ const fileUploadPost = async (req: Request, res: Response) => {
   const parentFolderId: string | null = req.body.parentFolderId || null;
   const path = await getPath(userId, parentFolderId, fileId);
 
-  createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
+  const bucketName = 'odin-FileUploader';
+  const filePath = 'Uploads';
+
+  try {
+    uploadFile(originalname, bucketName, filePath);
+    createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
+  } catch (err) {
+    console.log(err);
+  }
 
   res.redirect(`/folders/${parentFolderId ?? ''}`);
 };

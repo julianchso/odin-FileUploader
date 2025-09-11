@@ -33,11 +33,7 @@ const getFolderTree = async (userId: string | undefined, parentFolderId?: string
     },
   });
 
-  const folderTree: [] = [];
-
   return allFolders;
-
-  // TODO: create parent-child entities object
 };
 
 const getFolderById = async (id: string) => {
@@ -66,7 +62,6 @@ const getRootFolderData = async (userId: string) => {
   return { files: folders };
 };
 
-// TODO: This function is running twice and folder throwing null the second time?
 const getFolderData = async (folderId: string) => {
   const folder = await getFolderById(folderId);
 
