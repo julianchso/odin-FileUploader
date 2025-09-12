@@ -11,6 +11,7 @@ const uploadFile = async (file: string, bucketName: string, filePath: string) =>
 
   if (error) {
     console.log(error);
+    throw new Error('file not uploaded');
   } else {
     console.log('file uploaded successfully', data);
   }

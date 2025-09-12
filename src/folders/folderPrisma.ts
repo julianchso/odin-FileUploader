@@ -112,7 +112,7 @@ const getAllPaths = async (userId: string) => {
 
 const getAllFolderNamesIds = async (userId: string) => {
   return await prisma.metadata.findMany({
-    where: { userId: userId },
+    where: { userId: userId, type: 'FOLDER' },
     select: { id: true, name: true },
   });
 };

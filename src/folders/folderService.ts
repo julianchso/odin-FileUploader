@@ -21,7 +21,6 @@ type Folder = {
 const getFolderTree = async (userId: string) => {
   const allPaths = await getAllPaths(userId);
   const folderNamesAndIds = await getAllFolderNamesIds(userId);
-
   return buildFolderTree(allPaths, folderNamesAndIds);
 };
 

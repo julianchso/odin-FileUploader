@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { genPassword } from '../utils/passwordUtils.js';
 import prisma from '../database/prismaClient.js';
 import passport from 'passport';
+import storageClient from '../database/supabaseClient.js';
 
 const homeGet = (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
@@ -25,20 +26,40 @@ const signUpPost = async (req: Request, res: Response) => {
     const salt: string = saltHash.salt;
     const hash: string = saltHash.hash;
 
+    const userId = crypto.randomUUID();
+
     await prisma.user.create({
       data: {
+        id: userId,
         username: req.body.username,
         salt: salt,
         hash: hash,
       },
     });
 
+    await createUserFolderSupabase(userId, 'odin-FileUploader');
+
     res.redirect('/login');
   } catch (err) {
     console.log(err);
   }
+};
 
-  // console.log(user);
+const createUserFolderSupabase = async (userId: string, bucketName: string) => {
+  if (!storageClient) {
+    throw new Error('Supabase client not initialized');
+  }
+
+  const { data, error } = await storageClient.storage
+    .from(bucketName)
+    .upload(`${userId}/.emptyFolderPlaceholder`, new File([''], '.emptyFolderPlaceholder'));
+
+  if (error) {
+    console.log(error);
+    throw new Error();
+  } else {
+    console.log('user folder created successfully', data);
+  }
 };
 
 const loginGet = (req: Request, res: Response) => {

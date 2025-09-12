@@ -15,7 +15,7 @@ const fileUploadPost = async (req: Request, res: Response) => {
   const path = await getPath(userId, parentFolderId, fileId);
 
   const bucketName = 'odin-FileUploader';
-  const filePath = 'Uploads';
+  const filePath = `${req.user!.id}/${originalname}`;
 
   try {
     uploadFile(originalname, bucketName, filePath);
