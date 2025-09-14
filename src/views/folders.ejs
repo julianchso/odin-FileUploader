@@ -7,6 +7,10 @@
       rel="stylesheet"
       href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="../styles/output.css" />
     <title><%= title %></title>
   </head>
@@ -18,8 +22,6 @@
           <% if (currentUser) { %>
           <div><%- include('./partials/sidebar.ejs') %></div>
           <% }; %>
-
-          <!-- <aside><%# include('./partials/tree.ejs', {folders: folders}); %></aside> -->
           <aside><%- include('./partials/tree.ejs'); %></aside>
         </div>
         <div class="flex flex-col w-full p-5">
@@ -42,42 +44,69 @@
 
     <!-- new Folder Component -->
     <dialog id="newFolderModal">
-      <div>
-        <p>New Folder</p>
-        <button id="newFolderModalCloseBtn" type="reset">x</button>
+      <div class="flex flex-col justify-between w-full h-full">
+        <div class="dialog-header-container">
+          <p class="text-base font-bold">New Folder</p>
+          <button data-close-modal="newFolderModal" type="reset">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <form action="/folders" method="POST" class="flex flex-col w-full h-full text-sm">
+          <div class="my-3">
+            <input
+              type="text"
+              id="newFolderName"
+              name="newFolderName"
+              class="border-dark-aqua border px-3 rounded-[3px]"
+              required
+            />
+            <input type="hidden" name="parentFolderId" value="<%= parentFolderId || null %>" />
+          </div>
+          <button type="submit" class="dialog-submitBtn">Create</button>
+        </form>
       </div>
-      <form action="/folders" method="POST">
-        <div>
-          <input type="text" id="newFolderName" name="newFolderName" />
-          <input type="hidden" name="parentFolderId" value="<%= parentFolderId || null %>" />
-        </div>
-        <div>
-          <button type="submit">Create</button>
-        </div>
-      </form>
     </dialog>
 
     <!-- New File Component -->
     <dialog id="newFileModal">
-      <div>
-        <p>New File</p>
-        <button id="newFileModalCloseBtn" type="reset">x</button>
+      <div class="flex flex-col justify-between w-full h-full">
+        <div class="dialog-header-container">
+          <p class="text-base font-bold">New File</p>
+          <button data-close-modal="newFileModal" type="reset">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <form
+          action="/file"
+          method="POST"
+          enctype="multipart/form-data"
+          class="flex flex-col w-full h-full text-sm"
+        >
+          <div class="py-3 my-3">
+            <input type="file" name="uploaded_file" class="cursor-pointer" />
+            <input type="hidden" name="parentFolderId" value="<%= parentFolderId %>" />
+          </div>
+          <button type="submit" class="dialog-submitBtn">Upload</button>
+        </form>
       </div>
-      <form action="/file" method="POST" enctype="multipart/form-data">
-        <div>
-          <input type="file" name="uploaded_file" />
-          <input type="hidden" name="parentFolderId" value="<%= parentFolderId %>" />
-        </div>
-        <div>
-          <button type="submit">Upload</button>
-        </div>
-      </form>
     </dialog>
+    <!-- </div> -->
 
     <dialog id="deleteFolderModal">
-      <div>
-        <p id="deleteMessage"></p>
-        <form action='/folder/:folder.id_method="DELETE"' method="POST" id="deleteFolderForm">
+      <div class="flex flex-col justify-between w-full h-full">
+        <div class="dialog-header-container">
+          <p class="text-base font-bold">Delete Folder</p>
+          <button data-close-modal="deleteFolderModal" type="reset">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <p id="deleteMessage" class="font-bold"></p>
+        <form
+          action='/folder/:folder.id_method="DELETE"'
+          method="POST"
+          id="deleteFolderForm"
+          class="flex flex-col w-full h-full text-sm"
+        >
           <input type="hidden" name="folderId" id="deleteFolderIdInput" />
           <button type="reset" id="deleteFolderModalCloseBtn">Cancel</button>
           <button type="submit" id="deleteFolderBtn">Delete</button>
@@ -87,8 +116,19 @@
 
     <dialog id="editFolderModal">
       <div>
-        <p id="editMessage"></p>
-        <form action="/folder/:folder.id_method='PUT'" method="POST" id="editFolderForm">
+        <div class="dialog-header-container">
+          <p class="text-base font-bold">Delete Folder</p>
+          <button data-close-modal="editFolderModal" type="reset">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <p id="editMessage" class="font-bold"></p>
+        <form
+          action="/folder/:folder.id_method='PUT'"
+          method="POST"
+          id="editFolderForm"
+          class="flex flex-col w-full h-full text-sm"
+        >
           <input type="hidden" name="folderId" id="editFolderIdInput" />
           <input type="text" name="folderName" id="editFolderNameInput" value="folderName" />
           <button type="reset" id="editFolderModalCloseBtn">Cancel</button>

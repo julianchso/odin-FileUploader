@@ -18,8 +18,8 @@ const fileUploadPost = async (req: Request, res: Response) => {
   const filePath = `${req.user!.id}/${originalname}`;
 
   try {
-    uploadFile(originalname, bucketName, filePath);
-    createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
+    await uploadFile(originalname, bucketName, filePath);
+    await createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
   } catch (err) {
     console.log(err);
   }

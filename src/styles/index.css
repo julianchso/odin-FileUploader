@@ -94,6 +94,8 @@
 
   .svg-icon {
     fill: var(--color-dark-aqua);
+    color: var(--color-dark-aqua);
+
     width: 15px;
     height: 15px;
     margin-right: 5px;
@@ -107,6 +109,50 @@
     list-style-type: none;
     margin-left: 20px;
   }
+
+  input:focus,
+  select:focus {
+    outline: none;
+  }
+
+  dialog {
+    margin: 0;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 30%;
+    width: 500px;
+    height: 175px;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: var(--color-neutral-600);
+    color: var(--color-dark-aqua);
+  }
+
+  .dialog-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .dialog-submitBtn {
+    font-size: var(--text-sm);
+    align-self: end;
+    justify-self: end;
+    padding: 0 10px;
+    border-radius: 3px;
+    border: solid var(--color-neutral-800) 1px;
+  }
+
+  .dialog-submitBtn:hover {
+    background-color: var(--color-neutral-800);
+    transition: 0.1s ease-in;
+  }
+
+  /* .modalCtn {
+    display: flex;
+  } */
 }
 
 @utility drawer-sm {

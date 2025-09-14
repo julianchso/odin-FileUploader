@@ -1,7 +1,7 @@
 <body>
   <% if (currentUser) { %>
   <div class="flex flex-col gap-2 w-full align-middle">
-    <button id="newFileModalOpenBtn" class="sidebarBtn">
+    <button id="newFileModalOpenBtn" class="sidebarBtn" data-open-modal="newFileModal">
       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
         <path
           fill-rule="evenodd"
@@ -10,7 +10,7 @@
         /></svg
       >New File
     </button>
-    <button id="newFolderModalOpenBtn" class="sidebarBtn">
+    <button class="sidebarBtn" data-open-modal="newFolderModal">
       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
         <path
           fill-rule="evenodd"
@@ -23,7 +23,6 @@
   </div>
   <% } %>
   <script type="module" src="../../folders/createNewFolder.js"></script>
-  <script type="module" src="../../files/createNewFile.js"></script>
   <script
     type="module"
     src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"

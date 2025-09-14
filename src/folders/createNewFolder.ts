@@ -1,11 +1,18 @@
-const newFolderModal: HTMLDialogElement | null = document.querySelector('#newFolderModal');
-const newFolderModalOpen: HTMLElement | null = document.querySelector('#newFolderModalOpenBtn');
-const newFolderModalClose: HTMLElement | null = document.querySelector('#newFolderModalCloseBtn');
+const openModalButtons = document.querySelectorAll<HTMLButtonElement>('[data-open-modal]');
+const closeModalButtons = document.querySelectorAll<HTMLButtonElement>('[data-close-modal]');
 
-newFolderModalOpen?.addEventListener('click', () => {
-  newFolderModal?.showModal();
+openModalButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const modalId = btn.dataset.openModal;
+    const modal = document.getElementById(modalId!) as HTMLDialogElement | null;
+    modal?.showModal();
+  });
 });
 
-newFolderModalClose?.addEventListener('click', () => {
-  newFolderModal?.close();
+closeModalButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const modalId = btn.dataset.closeModal;
+    const modal = document.getElementById(modalId!) as HTMLDialogElement | null;
+    modal?.close();
+  });
 });

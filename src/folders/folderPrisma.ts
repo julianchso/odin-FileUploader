@@ -19,6 +19,15 @@ const createFolder = async (
   });
 };
 
+const getUsernameById = async (userId: string) => {
+  const username = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { username: true },
+  });
+
+  return username;
+};
+
 const getFolderTree = async (userId: string | undefined, parentFolderId?: string | null) => {
   const allFolders = await prisma.metadata.findMany({
     where: {
@@ -119,6 +128,7 @@ const getAllFolderNamesIds = async (userId: string) => {
 
 export {
   createFolder,
+  getUsernameById,
   getFolderTree,
   getFolderById,
   getFolderByIdFromName,

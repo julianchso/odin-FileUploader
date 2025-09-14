@@ -38,9 +38,10 @@
         <!-- dropdown for rename and delete -->
         <div class="dropdown-content">
           <div
-            class="editFolderModalOpenBtn flex flex-row cursor-pointer"
+            class="flex flex-row cursor-pointer"
             data-id="<%= children.id %>"
             data-name="<%= children.name %>"
+            data-open-modal="editFolderModal"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="svg-icon">
               <defs>
@@ -67,6 +68,7 @@
             class="deleteFolderModalOpenBtn flex flex-row cursor-pointer"
             data-id="<%= children.id %>"
             data-name="<%= children.name %>"
+            data-open-modal="deleteFolderModal"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

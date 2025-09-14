@@ -4,7 +4,6 @@ const editFolderModalOpenBtns: NodeListOf<HTMLButtonElement> | null =
 const form: HTMLFormElement | null = document.querySelector('#editFolderForm');
 const folderIdInput: HTMLFormElement | null = document.querySelector('#editFolderIdInput');
 const folderNameInput: HTMLFormElement | null = document.querySelector('#editFolderNameInput');
-const closeModal: HTMLFormElement | null = document.querySelector('#editFolderModalCloseBtn');
 
 editFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {
   const editMessage: HTMLElement | null = document.querySelector('#editMessage');
@@ -18,10 +17,6 @@ editFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {
       form.value = folderId;
     }
 
-    if (editMessage) {
-      editMessage.textContent = 'Rename';
-    }
-
     if (folderIdInput && folderNameInput) {
       folderIdInput.value = folderId;
       folderNameInput.value = folderName;
@@ -29,10 +24,6 @@ editFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {
 
     editFolderModal?.showModal();
   });
-});
-
-closeModal?.addEventListener('click', () => {
-  editFolderModal?.close();
 });
 
 const dropdowns: NodeList = document.querySelectorAll('.dropdownBtn');
@@ -65,7 +56,7 @@ function openDropdown() {
   }
 }
 
-window.addEventListener('click', function (e) {
+window.addEventListener('click', () => {
   // closes dropdown when other areas are clicked
   for (let i = 0; i < dropdownOptions.length; i++) {
     const openDropdown = dropdownOptions[i];
@@ -79,20 +70,17 @@ window.addEventListener('click', function (e) {
 openDropdown();
 
 const deleteFolderModal: HTMLDialogElement | null = document.querySelector('#deleteFolderModal');
-const deleteFolderModalOpenBtns: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll(
+const deleteFolderModalOpenBtn: HTMLButtonElement | null = document.querySelector(
   '.deleteFolderModalOpenBtn'
 );
 const formDelete: HTMLFormElement | null = document.querySelector('#deleteFolderForm');
 const folderIdInputDelete: HTMLFormElement | null = document.querySelector('#deleteFolderIdInput');
-const closeModalDelete: HTMLFormElement | null = document.querySelector(
-  '#deleteFolderModalCloseBtn'
-);
 
-deleteFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {
-  const deleteMessage: HTMLElement | null = document.querySelector('#deleteMessage');
-  button.addEventListener('click', () => {
-    const folderId = button.dataset.id;
-    const folderName = button.dataset.name;
+if (deleteFolderModalOpenBtn) {
+  deleteFolderModalOpenBtn!.addEventListener('click', () => {
+    const deleteMessage: HTMLElement | null = document.querySelector('#deleteMessage');
+    const folderId = deleteFolderModalOpenBtn.dataset.id;
+    const folderName = deleteFolderModalOpenBtn.dataset.name;
 
     if (formDelete) {
       formDelete.action = `/folders/${folderId}?_method=DELETE`;
@@ -109,8 +97,4 @@ deleteFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {
 
     deleteFolderModal?.showModal();
   });
-});
-
-closeModalDelete?.addEventListener('click', () => {
-  deleteFolderModal?.close();
-});
+}
