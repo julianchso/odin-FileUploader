@@ -36,8 +36,9 @@
       <div class="drawer-content text-md fileInfoText"></div>
       <wa-button slot="footer" variant="brand" data-drawer="close">Close</wa-button>
       <wa-button slot="footer">Share</wa-button>
-      <form action="/file/delete" slot="footer">
-        <wa-button>Delete</wa-button>
+      <form action="/file/delete?_method=DELETE" method="POST" slot="footer">
+        <input type="hidden" name="deleteFileInput" id="deleteFileInput" value="" />
+        <wa-button type="submit">Delete</wa-button>
       </form>
       <wa-button slot="footer">Download</wa-button>
     </wa-drawer>
@@ -83,7 +84,7 @@
           class="flex flex-col w-full h-full text-sm"
         >
           <div class="py-3 my-3">
-            <input type="file" name="uploaded_file" class="cursor-pointer" />
+            <input type="file" name="uploaded_file" class="cursor-pointer" required />
             <input type="hidden" name="parentFolderId" value="<%= parentFolderId %>" />
           </div>
           <button type="submit" class="dialog-submitBtn">Upload</button>
@@ -102,7 +103,7 @@
         </div>
         <p id="deleteMessage" class="font-bold"></p>
         <form
-          action='/folder/:folder.id_method="DELETE"'
+          action="/folder/:folder.id_method=DELETE"
           method="POST"
           id="deleteFolderForm"
           class="flex flex-col w-full h-full text-sm"

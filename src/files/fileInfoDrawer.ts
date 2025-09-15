@@ -1,6 +1,8 @@
 // import { format } from 'https://esm.sh/date-fns';
 // import formatDate from '../utils/formatDateUtils.js';
 
+import { create } from 'domain';
+
 const drawer = document.querySelector<HTMLElement | (null & { open: boolean })>('.drawer-overview');
 const openDrawerBtns = document.querySelectorAll<HTMLElement>('.open-drawer-btn');
 const drawerContent = document.querySelector<HTMLElement>('.drawer-content');
@@ -76,12 +78,13 @@ const displayFileInfo = (info: Info) => {
   modifiedAtValue.textContent = info.modifiedAt.toString();
   modifiedAt.append(modifiedAtLabel, modifiedAtValue);
 
+  const deleteFileInput = document.querySelector('#deleteFileInput') as HTMLInputElement | null;
+  if (deleteFileInput) {
+    deleteFileInput.value = info.id;
+  }
+
   if (drawerContent && drawer) {
     drawerContent.innerHTML = '';
-    drawerContent.append(name);
-    drawerContent.append(size);
-    drawerContent.append(type);
-    drawerContent.append(createdAt);
-    drawerContent.append(modifiedAt);
+    drawerContent.append(name, size, type, createdAt, modifiedAt);
   }
 };

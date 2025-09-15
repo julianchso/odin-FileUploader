@@ -23,6 +23,14 @@ const createNewFile = async (
   });
 };
 
+const deleteEntity = async (id: string) => {
+  return await prisma.metadata.delete({
+    where: {
+      id: id,
+    },
+  });
+};
+
 const getFileInfo = async (id: string) => {
   return await prisma.metadata.findUnique({
     where: {
@@ -57,4 +65,4 @@ const getBreadcrumbs = async (id: string, breadcrumbs: Breadcrumbs[] = []) => {
   }
 };
 
-export { createNewFile, getBreadcrumbs, getFileInfo };
+export { createNewFile, getBreadcrumbs, getFileInfo, deleteEntity };

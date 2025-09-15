@@ -26,7 +26,7 @@ const foldersGet = async (req: Request, res: Response) => {
 
   const username = (await getUsernameById(userId!))!.username;
   const breadcrumbs = [
-    { id: userId!, folderName: username },
+    { id: '', folderName: username },
     ...(folderId ? await getBreadcrumbs(folderId) : []),
   ];
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createNewFile } from './filePrisma.js';
+import { createNewFile, deleteEntity } from './filePrisma.js';
 import { getPath } from '../folders/folderService.js';
 import { uploadFile } from '../storage/storageController.js';
 
@@ -27,4 +27,14 @@ const fileUploadPost = async (req: Request, res: Response) => {
   res.redirect(`/folders/${parentFolderId ?? ''}`);
 };
 
-export { fileUploadPost };
+const fileDelete = async (req: Request, res: Response) => {
+  const fileId = req.body.deleteFileInput;
+  try {
+    await deleteEntity(fileId);
+  } catch (err) {
+    console.log(err);
+  }
+  res.redirect('/folders/');
+};
+
+export { fileUploadPost, fileDelete };
