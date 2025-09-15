@@ -1,6 +1,4 @@
 import { getPath as getParentPath, getAllPaths, getAllFolderNamesIds } from './folderPrisma.js';
-import prisma from '../database/prismaClient.js';
-import { record } from 'zod';
 
 const getPath = async (userId: string, parentId: string | null, folderId: string) => {
   if (parentId == null) {
