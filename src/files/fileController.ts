@@ -1,7 +1,12 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { createNewFile, deleteEntity } from './filePrisma.js';
 import { getPath } from '../folders/folderService.js';
-import { deleteEntitySupa, uploadFile } from '../storage/storageController.js';
+import {
+  deleteEntitySupa,
+  downloadFile,
+  uploadFile,
+  listItems,
+} from '../storage/storageController.js';
 
 const fileUploadPost = async (req: Request, res: Response) => {
   if (!req.file) {
@@ -19,6 +24,7 @@ const fileUploadPost = async (req: Request, res: Response) => {
 
   try {
     await uploadFile(bucket, storagePath, localPath, mimetype);
+    await listItems(bucket, userId);
     await createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
   } catch (err) {
     console.log(err);
@@ -29,10 +35,16 @@ const fileUploadPost = async (req: Request, res: Response) => {
 
 const fileDelete = async (req: Request, res: Response) => {
   const fileId = req.body.deleteFileInput;
+  const userId = res.locals.currentUser.id;
+
+  const bucket = 'odin-FileUploader';
+  const storagePath = `${userId}/${fileId}`;
+
+  await listItems(bucket, userId);
+
   try {
     await deleteEntity(fileId);
-    // await deleteEntitySupa()
-    // TODO: add deletion from supabase storage
+    await deleteEntitySupa(bucket, storagePath);
   } catch (err) {
     console.log(err);
   }

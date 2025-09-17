@@ -1,6 +1,5 @@
 import storageClient from '../database/supabaseClient.js';
 import fs from 'fs';
-import mime from 'mime-types';
 
 const uploadFile = async (
   bucket: string,
@@ -13,26 +12,47 @@ const uploadFile = async (
   }
 
   const fileBuffer = fs.readFileSync(localPath);
-  // const fileName = filePath.split('/').pop()!;
 
   const { data, error } = await storageClient.storage
     .from(bucket)
     .upload(storagePath, fileBuffer, { contentType: mimetype, upsert: false });
 
   if (error) {
-    console.log(error);
-    throw new Error('file not uploaded');
+    console.error('Supabase upload error:', error);
+    throw error;
   } else {
+    fs.unlinkSync(localPath);
     console.log('file uploaded successfully', data);
   }
 };
 
-const deleteEntitySupa = async (file: string, bucket: string, filePath: string) => {
+const downloadFile = async () => {};
+
+const deleteEntitySupa = async (bucket: string, storagePath: string) => {
   if (!storageClient) {
     throw new Error('Supabase client not initialized');
   }
 
-  return await storageClient.storage.from(bucket).remove([file, filePath]);
+  const { data, error } = await storageClient.storage.from(bucket).remove([storagePath]);
+  console.log(storagePath);
+
+  if (error) {
+    console.log(error);
+    throw new Error('file not deleted)');
+  } else {
+    console.log('file deleted successfully', data);
+    return data;
+  }
 };
 
-export { uploadFile, deleteEntitySupa };
+const listItems = async (bucket: string, userId: string) => {
+  if (!storageClient) {
+    throw new Error('Supabase client not initialized');
+  }
+  const list = await storageClient.storage.from(bucket).list(`${userId}`, { limit: 100 });
+
+  console.log(list);
+  return list;
+};
+
+export { uploadFile, downloadFile, listItems, deleteEntitySupa };
