@@ -1,5 +1,6 @@
 import storageClient from '../database/supabaseClient.js';
 import fs from 'fs';
+import { promises as fsp } from 'fs';
 
 const uploadFile = async (
   bucket: string,
@@ -26,7 +27,20 @@ const uploadFile = async (
   }
 };
 
-const downloadFile = async () => {};
+const downloadFile = async (bucket: string, storagePath: string, downloadFilePath: string) => {
+  if (!storageClient) {
+    throw new Error('Supabase client not initialized');
+  }
+  const { data, error } = await storageClient.storage.from(bucket).download(storagePath);
+
+  if (error) {
+    throw error;
+  }
+
+  const buffer = Buffer.from(await data.arrayBuffer());
+  await fsp.writeFile(downloadFilePath, buffer);
+  console.log(`File downloaded to ${downloadFilePath}`);
+};
 
 const deleteEntitySupa = async (bucket: string, storagePath: string) => {
   if (!storageClient) {
@@ -45,14 +59,4 @@ const deleteEntitySupa = async (bucket: string, storagePath: string) => {
   }
 };
 
-const listItems = async (bucket: string, userId: string) => {
-  if (!storageClient) {
-    throw new Error('Supabase client not initialized');
-  }
-  const list = await storageClient.storage.from(bucket).list(`${userId}`, { limit: 100 });
-
-  console.log(list);
-  return list;
-};
-
-export { uploadFile, downloadFile, listItems, deleteEntitySupa };
+export { uploadFile, downloadFile, deleteEntitySupa };

@@ -1,12 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { createNewFile, deleteEntity } from './filePrisma.js';
 import { getPath } from '../folders/folderService.js';
-import {
-  deleteEntitySupa,
-  downloadFile,
-  uploadFile,
-  listItems,
-} from '../storage/storageController.js';
+import { deleteEntitySupa, uploadFile } from '../storage/storageController.js';
 
 const fileUploadPost = async (req: Request, res: Response) => {
   if (!req.file) {
@@ -24,7 +19,6 @@ const fileUploadPost = async (req: Request, res: Response) => {
 
   try {
     await uploadFile(bucket, storagePath, localPath, mimetype);
-    await listItems(bucket, userId);
     await createNewFile(fileId, originalname, mimetype, userId, parentFolderId, size, path);
   } catch (err) {
     console.log(err);
@@ -40,7 +34,7 @@ const fileDelete = async (req: Request, res: Response) => {
   const bucket = 'odin-FileUploader';
   const storagePath = `${userId}/${fileId}`;
 
-  await listItems(bucket, userId);
+  // TODO: delete cascade files when parent folder is deleted.
 
   try {
     await deleteEntity(fileId);

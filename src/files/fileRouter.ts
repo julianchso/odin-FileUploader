@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { fileUploadPost, fileDelete } from './fileController.js';
 import multer from 'multer';
-import { isAuthenticated } from '../middleware/isAuthenticated.js';
 
 const upload = multer({ dest: 'uploads/' });
 

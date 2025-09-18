@@ -1,4 +1,7 @@
 import { getPath as getParentPath, getAllPaths, getAllFolderNamesIds } from './folderPrisma.js';
+import { Request, Response } from 'express';
+import os from 'os';
+import { downloadFile } from '../storage/storageController.js';
 
 const getPath = async (userId: string, parentId: string | null, folderId: string) => {
   if (parentId == null) {
@@ -52,4 +55,24 @@ function buildFolderTree(
   return root;
 }
 
-export { getPath, getFolderTree };
+const fileDownload = async (req: Request, res: Response) => {
+  document.querySelector('#downloadFileBtn')?.addEventListener('click', async () => {
+    console.log('download button click');
+    const fileId = document.querySelector<HTMLFormElement>('#downloadFileInput')!.value;
+    const userId = res.locals.currentUser.id;
+
+    const bucket = 'odin-FileUploader';
+    const storagePath = `${userId}/${fileId}`;
+
+    const homeDir = os.homedir();
+    const downloadPath = `${homeDir}/Desktop`;
+
+    try {
+      await downloadFile(bucket, storagePath, downloadPath);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+};
+
+export { getPath, getFolderTree, fileDownload };

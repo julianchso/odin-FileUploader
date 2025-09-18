@@ -40,7 +40,10 @@
         <input type="hidden" name="deleteFileInput" id="deleteFileInput" value="" />
         <wa-button type="submit">Delete</wa-button>
       </form>
-      <wa-button slot="footer">Download</wa-button>
+      <form id="downloadForm" slot="footer">
+        <input type="hidden" name="downloadFileInput" id="downloadFileInput" value="" />
+        <wa-button id="downloadFileBtn">Download</wa-button>
+      </form>
     </wa-drawer>
 
     <!-- new Folder Component -->
@@ -140,6 +143,7 @@
 
     <script type="module" src="../folders/deleteFolder.js"></script>
     <script type="module" src="../folders/editFolder.js"></script>
+    <script type="module" src="../folders/folderService.js"></script>
     <script type="module" src="../folders/createNewFolder.js"></script>
     <script type="module" src="../files/fileInfoDrawer.js"></script>
     <script

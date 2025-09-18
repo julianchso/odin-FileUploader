@@ -78,10 +78,12 @@ const displayFileInfo = (info: Info) => {
   modifiedAtValue.textContent = info.modifiedAt.toString();
   modifiedAt.append(modifiedAtLabel, modifiedAtValue);
 
-  const deleteFileInput = document.querySelector('#deleteFileInput') as HTMLInputElement | null;
-  if (deleteFileInput) {
-    deleteFileInput.value = info.id;
-  }
+  const selectors = ['#deleteFileInput', '#downloadFileInput'];
+
+  selectors.forEach((selector) => {
+    const input = document.querySelector(selector) as HTMLInputElement | null;
+    if (input) input.value = info.id;
+  });
 
   if (drawerContent && drawer) {
     drawerContent.innerHTML = '';
