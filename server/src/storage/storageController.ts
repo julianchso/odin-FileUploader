@@ -27,7 +27,8 @@ const uploadFile = async (
   }
 };
 
-const downloadFile = async (bucket: string, storagePath: string, downloadFilePath: string) => {
+const downloadFile = async (bucket: string, storagePath: string, filename: string) => {
+  console.log('supabase download');
   if (!storageClient) {
     throw new Error('Supabase client not initialized');
   }
@@ -37,9 +38,21 @@ const downloadFile = async (bucket: string, storagePath: string, downloadFilePat
     throw error;
   }
 
-  const buffer = Buffer.from(await data.arrayBuffer());
-  await fsp.writeFile(downloadFilePath, buffer);
-  console.log(`File downloaded to ${downloadFilePath}`);
+  const url = URL.createObjectURL(data);
+
+  // Create temporary <a> link
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename; // suggested filename
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+  // const buffer = Buffer.from(await data.arrayBuffer());
+  // await fsp.writeFile(downloadPath, buffer);
+  // console.log(`File downloaded to ${downloadPath}`);
 };
 
 const deleteEntitySupa = async (bucket: string, storagePath: string) => {

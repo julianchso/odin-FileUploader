@@ -1,8 +1,6 @@
 // import { format } from 'https://esm.sh/date-fns';
 // import formatDate from '../utils/formatDateUtils.js';
 
-import { create } from 'domain';
-
 const drawer = document.querySelector<HTMLElement | (null & { open: boolean })>('.drawer-overview');
 const openDrawerBtns = document.querySelectorAll<HTMLElement>('.open-drawer-btn');
 const drawerContent = document.querySelector<HTMLElement>('.drawer-content');
@@ -15,8 +13,8 @@ interface Info {
   mimeType: string;
   createdAt: string;
   modifiedAt: string;
-  parentfolderid: string | null;
-  userid: string;
+  parentfolderId: string | null;
+  userId: string;
 }
 
 openDrawerBtns.forEach((openButton) => {
@@ -24,13 +22,11 @@ openDrawerBtns.forEach((openButton) => {
     (drawer as any).open = true;
     const fileInfoClass = (e.currentTarget as HTMLElement).nextElementSibling as HTMLElement | null;
 
-    console.log(fileInfoClass);
     let fileInfo = fileInfoClass?.dataset.fileInfo;
 
     if (fileInfo) {
       const parsed = JSON.parse(fileInfo) as Info;
       displayFileInfo(parsed);
-      console.log(parsed);
     }
   });
 });
@@ -78,12 +74,23 @@ const displayFileInfo = (info: Info) => {
   modifiedAtValue.textContent = info.modifiedAt.toString();
   modifiedAt.append(modifiedAtLabel, modifiedAtValue);
 
-  const selectors = ['#deleteFileInput', '#downloadFileInput'];
+  const deleteFileInput = document.querySelector('#deleteFileInput') as HTMLInputElement | null;
+  if (deleteFileInput) {
+    deleteFileInput.value = info.id;
+  }
 
-  selectors.forEach((selector) => {
-    const input = document.querySelector(selector) as HTMLInputElement | null;
-    if (input) input.value = info.id;
-  });
+  const downloadFileBtn = document.querySelector('#downloadFileBtn') as HTMLElement | null;
+  if (downloadFileBtn) {
+    downloadFileBtn.dataset.fileId = info.id;
+    downloadFileBtn.dataset.userId = info.userId;
+  }
+
+  // const selectors = ['#deleteFileInput', '#downloadFileInput'];
+
+  // selectors.forEach((selector) => {
+  //   const input = document.querySelector(selector) as HTMLInputElement | null;
+  //   if (input) input.value = info.id;
+  // });
 
   if (drawerContent && drawer) {
     drawerContent.innerHTML = '';

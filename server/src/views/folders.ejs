@@ -40,10 +40,12 @@
         <input type="hidden" name="deleteFileInput" id="deleteFileInput" value="" />
         <wa-button type="submit">Delete</wa-button>
       </form>
-      <form id="downloadForm" slot="footer">
-        <input type="hidden" name="downloadFileInput" id="downloadFileInput" value="" />
-        <wa-button id="downloadFileBtn">Download</wa-button>
-      </form>
+      <!-- <form id="downloadForm" slot="footer"> -->
+      <!-- <input type="hidden" name="downloadFileInput" id="downloadFileInput" value="" /> -->
+      <wa-button id="downloadFileBtn" slot="footer" data-file-id="" data-user-id=""
+        >Download</wa-button
+      >
+      <!-- </form> -->
     </wa-drawer>
 
     <!-- new Folder Component -->
@@ -146,6 +148,7 @@
     <script type="module" src="../folders/folderService.js"></script>
     <script type="module" src="../folders/createNewFolder.js"></script>
     <script type="module" src="../files/fileInfoDrawer.js"></script>
+    <script type="module" src="../js/download.js"></script>
     <script
       type="module"
       src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
