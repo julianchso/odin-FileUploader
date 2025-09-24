@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { genPassword } from '../utils/passwordUtils.js';
 import prisma from '../database/prismaClient.js';
 import passport from 'passport';
@@ -81,7 +81,7 @@ const logout = (req: Request, res: Response, next: NextFunction) => {
     if (err) {
       return next(err);
     }
-    req.session.destroy(function (err) {
+    req.session.destroy(function () {
       res.redirect('/');
     });
   });

@@ -1,7 +1,6 @@
 import { getPath as getParentPath, getAllPaths, getAllFolderNamesIds } from './folderPrisma.js';
-import { Request, Response } from 'express';
 // import os from 'os';
-import { downloadFile } from '../storage/storageController.js';
+// import type { downloadFile } from '../storage/storageController.js';
 
 const getPath = async (userId: string, parentId: string | null, folderId: string) => {
   if (parentId == null) {

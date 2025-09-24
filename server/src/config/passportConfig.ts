@@ -3,11 +3,11 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { validatePassword } from '../utils/passwordUtils.js';
 
 import prisma from '../database/prismaClient.js';
-import { User } from '@prisma/client';
 
 export default passport.use(
   new LocalStrategy(async (username: string, password: string, done: Function) => {
-    const user: Promise<string> = await prisma.user
+    // const user: Promise<string> = await prisma.user
+    await prisma.user
       .findUnique({
         where: {
           username: username,

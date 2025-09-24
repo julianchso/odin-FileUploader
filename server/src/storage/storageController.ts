@@ -1,6 +1,6 @@
 import storageClient from '../database/supabaseClient.js';
 import fs from 'fs';
-import { promises as fsp } from 'fs';
+// import { promises as fsp } from 'fs';
 
 const uploadFile = async (
   bucket: string,

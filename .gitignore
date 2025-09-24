@@ -27,4 +27,3 @@ dist-ssr
 uploads
 prisma/migrations
 public/
-dist/

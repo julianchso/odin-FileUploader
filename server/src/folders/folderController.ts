@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { createFolder, getFolderById, getUsernameById } from './folderPrisma.js';
 import { getFolderData, getRootFolderData } from './folderPrisma.js';
 import { getFolderTree } from './folderService.js';

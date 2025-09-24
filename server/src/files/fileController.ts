@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { createNewFile, deleteEntity } from './filePrisma.js';
 import { getPath } from '../folders/folderService.js';
-import { deleteEntitySupa, uploadFile, downloadFile } from '../storage/storageController.js';
+import { deleteEntitySupa, uploadFile } from '../storage/storageController.js';
 
 const fileUploadPost = async (req: Request, res: Response) => {
   if (!req.file) {

@@ -6,7 +6,7 @@ const folderIdInput: HTMLFormElement | null = document.querySelector('#editFolde
 const folderNameInput: HTMLFormElement | null = document.querySelector('#editFolderNameInput');
 
 editFolderModalOpenBtns?.forEach((button: HTMLButtonElement) => {
-  const editMessage: HTMLElement | null = document.querySelector('#editMessage');
+  // const editMessage: HTMLElement | null = document.querySelector('#editMessage');
 
   button.addEventListener('click', () => {
     const folderId = button.dataset.id;
