@@ -1,30 +1,45 @@
-<body>
-  <% if (currentUser) { %>
-  <div class="flex flex-col gap-2 w-full align-middle">
-    <button id="newFileModalOpenBtn" class="sidebarBtn" data-open-modal="newFileModal">
-      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M9.5 1.1l3.4 3.5.1.4v2h-1V6H8V2H3v11h4v1H2.5l-.5-.5v-12l.5-.5h6.7l.3.1zM9 2v3h2.9L9 2zm4 14h-1v-3H9v-1h3V9h1v3h3v1h-3v3z"
-        /></svg
-      >New File
-    </button>
-    <button class="sidebarBtn" data-open-modal="newFolderModal">
-      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M14.5 2H7.71l-.85-.85L6.51 1h-5l-.5.5v11l.5.5H7v-1H1.99V6h4.49l.35-.15.86-.86H14v1.5l-.001.51h1.011V2.5L14.5 2zm-.51 2h-6.5l-.35.15-.86.86H2v-3h4.29l.85.85.36.15H14l-.01.99zM13 16h-1v-3H9v-1h3V9h1v3h3v1h-3v3z"
-        />
-      </svg>
-      New Folder
-    </button>
-  </div>
-  <% } %>
-  <script type="module" src="../../folders/createNewFolder.js"></script>
-  <script
-    type="module"
-    src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
-  ></script>
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' data: gap: https://*.fontawesome.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://*.fontawesome.com/; media-src *; img-src 'self' data: content:; "
+    />
+    <link
+      rel="stylesheet"
+      href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
+    />
+    <title></title>
+  </head>
+  <body>
+    <% if (currentUser) { %>
+    <div class="flex flex-col gap-2 w-full align-middle">
+      <button id="newFileModalOpenBtn" class="sidebarBtn" data-open-modal="newFileModal">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M9.5 1.1l3.4 3.5.1.4v2h-1V6H8V2H3v11h4v1H2.5l-.5-.5v-12l.5-.5h6.7l.3.1zM9 2v3h2.9L9 2zm4 14h-1v-3H9v-1h3V9h1v3h3v1h-3v3z"
+          /></svg
+        >New File
+      </button>
+      <button class="sidebarBtn" data-open-modal="newFolderModal">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M14.5 2H7.71l-.85-.85L6.51 1h-5l-.5.5v11l.5.5H7v-1H1.99V6h4.49l.35-.15.86-.86H14v1.5l-.001.51h1.011V2.5L14.5 2zm-.51 2h-6.5l-.35.15-.86.86H2v-3h4.29l.85.85.36.15H14l-.01.99zM13 16h-1v-3H9v-1h3V9h1v3h3v1h-3v3z"
+          />
+        </svg>
+        New Folder
+      </button>
+    </div>
+    <% } %>
+    <script type="module" src="../../folders/createNewFolder.js"></script>
+    <script
+      type="module"
+      src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+    ></script>
+  </body>
+</html>

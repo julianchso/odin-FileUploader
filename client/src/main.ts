@@ -2,6 +2,19 @@
 
 import { downloadFile } from './js/download';
 
+const loadFiles = async () => {
+  try {
+    const res = await fetch('/api'); // <-- goes through Vite proxy
+    if (!res.ok) throw new Error(`Error: ${res.status}`);
+    const data = await res.json();
+    console.log('Files:', data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+loadFiles();
+
 document.addEventListener('DOMContentLoaded', async () => {
   const downloadBtn = document.querySelector<HTMLButtonElement>('#downloadFileBtn');
 

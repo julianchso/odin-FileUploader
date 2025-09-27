@@ -1,13 +1,16 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { configDotenv } from 'dotenv';
+// import { configDotenv } from 'dotenv';
 import type { Database } from '../../../../types/database.d.ts';
 
-configDotenv();
+// configDotenv();
 
 let storageClient: SupabaseClient | undefined;
 
-if (process.env.PROJECT_URL && process.env.SUPABASE_KEY) {
-  storageClient = createClient<Database>(process.env.PROJECT_URL, process.env.SUPABASE_ANON_KEY!);
+if (import.meta.env.PROJECT_URL && import.meta.env.SUPABASE_KEY) {
+  storageClient = createClient<Database>(
+    import.meta.env.PROJECT_URL,
+    import.meta.env.SUPABASE_ANON_KEY!
+  );
   console.log(`storage client: ${storageClient}`);
 }
 
