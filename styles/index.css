@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @layer theme, base, components, utilities;
+@source "../server";
 
 @theme {
   --color-dark-aqua: #3ab7bf;

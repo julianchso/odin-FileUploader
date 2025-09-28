@@ -7,8 +7,8 @@
   "type": "module",
   "scripts": {
     "watch:ts": "cd ./server && tsc",
-    "copy:views": "copyfiles -u 3 server/src/views/**/* server/dist/views",
-    "dev:server": "nodemon server/dist/app.js",
+    "copy:views": "copyfiles -u 3 server/src/views/**/* server/build/views",
+    "dev:server": "nodemon server/build/app.js",
     "dev:client": "vite",
     "dev": "concurrently \"npm run watch:ts\" \"npm run copy:views\" \"npm run dev:server\" \"npm run dev:client\"",
     "build:ts": "cd ./server && tsc && npm run copy:views",

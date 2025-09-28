@@ -14,7 +14,6 @@ import { fileURLToPath } from 'url';
 import authRouter from './auth/authRouter.js';
 import folderRouter from './folders/folderRouter.js';
 import fileRouter from './files/fileRouter.js';
-import apiRouter from './api/apiRouter.js';
 
 import prisma from './database/prismaClient.js';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
@@ -33,7 +32,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-app.use(express.static(path.join(__dirname, '../../client/dist')));
+app.use(express.static(path.join(__dirname)));
 
 app.use(
   session({
@@ -59,7 +58,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', apiRouter);
 app.use('/', authRouter);
 app.use('/folders', folderRouter);
 app.use('/file', fileRouter);
