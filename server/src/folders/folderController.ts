@@ -5,6 +5,7 @@ import { getFolderTree } from './folderService.js';
 import prisma from '../database/prismaClient.js';
 import { getBreadcrumbs } from '../files/filePrisma.js';
 import { getPath } from './folderService.js';
+import { formatDateTime } from '../utils/formatDateTimeUtils.js';
 
 const foldersGet = async (req: Request, res: Response) => {
   const user = req.session.passport?.user;
@@ -37,6 +38,7 @@ const foldersGet = async (req: Request, res: Response) => {
     parentFolderId: folderId,
     folderData: folderData,
     breadcrumbs: breadcrumbs,
+    formatDateTime: formatDateTime,
   });
 };
 

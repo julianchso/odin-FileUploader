@@ -35,8 +35,8 @@
           <!-- placeholder for type -->
           <div>—</div>
           <!-- placeholder for size -->
-          <div><%= childFolder.createdAt %></div>
-          <div><%= childFolder.modifiedAt %></div>
+          <div><%= formatDateTime(childFolder.createdAt) %></div>
+          <div><%= formatDateTime(childFolder.modifiedAt) %></div>
         </a>
         <% } else if (childFolder.type == "FILE") { %>
         <div
@@ -47,8 +47,8 @@
           <div><%= childFolder.name %></div>
           <div><%= childFolder.mimeType %></div>
           <div><%= childFolder.size %></div>
-          <div><%= childFolder.createdAt %></div>
-          <div><%= childFolder.modifiedAt %></div>
+          <div><%= formatDateTime(childFolder.createdAt) %></div>
+          <div><%= formatDateTime(childFolder.modifiedAt) %></div>
         </div>
         <div
           name="fileInfo"
